@@ -50,13 +50,13 @@ public class HurdleController : MonoBehaviour
 ```
 
 ## 주요 변수
-- player : 플레이어의 ``Transform``을 참조하며, 장애물은 이 객체와의 거리 관계를 기준으로 이동 여부 결정
-- hurdleSpeed : 장애물이 이동하는 속도 설정
-- distanceHurdle : 플레이어와 장애물 간의 거리가 특정 값 이하일 때, 장애물이 이동을 시작하도록 설정
-- isPlayerJumping : 플레이어가 점프 중인지 여부를 나타내는 변수로, 플레이어의 점프 상태에 따라 장애물 이동 여부 결정
-- shouldMove : 장애물이 이동할 준비가 되었는지 추적하는 플래그 변수
-- hasMoved : 장애물이 이미 이동했는지 여부를 추적하여 중복 이동 방지
-- targetXPosition : 장애물이 목표로 이동할 X 좌표 저장
+- *player* : 플레이어의 ``Transform``을 참조하며, 장애물은 이 객체와의 거리 관계를 기준으로 이동 여부 결정
+- *hurdleSpeed* : 장애물이 이동하는 속도 설정
+- *distanceHurdle* : 플레이어와 장애물 간의 거리가 특정 값 이하일 때, 장애물이 이동을 시작하도록 설정
+- *isPlayerJumping* : 플레이어가 점프 중인지 여부를 나타내는 변수로, 플레이어의 점프 상태에 따라 장애물 이동 여부 결정
+- *shouldMove* : 장애물이 이동할 준비가 되었는지 추적하는 플래그 변수
+- *hasMoved* : 장애물이 이미 이동했는지 여부를 추적하여 중복 이동 방지
+- *targetXPosition* : 장애물이 목표로 이동할 X 좌표 저장
 
 ## 주요 메서드
 1. Update()
