@@ -65,4 +65,4 @@ public class HurdleController : MonoBehaviour
    - 목표 위치에 도달하면, 더 이상이동하지 않도록 ``shouldMove``와 ``hasMoved``값을 업데이트
 2. SetPlayerJumping(bool isJumping)
    - 외부에서 호출되어 플레이어의 점프상태(``isJumping``)를 설정하는 메서드
-   - 이 값에 따라 장애물이 이동할지 말지 정
+   - 이 값에 따라 장애물이 이동할지 말지 정함 
