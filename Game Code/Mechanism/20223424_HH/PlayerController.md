@@ -18,14 +18,12 @@ public class PlayerController : MonoBehaviour
 
     public HurdleController hurdleController;
 
-    
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         startPoint = transform.position;
     }
 
-    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
