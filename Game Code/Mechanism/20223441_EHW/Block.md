@@ -15,7 +15,7 @@ private void OnTriggerEnter(Collider other) {
 		Instantiate(blockPrefab, spawnPoint.position, spawnPoint.rotation);
 	}
 }
-```
 
 // 빈 오브젝트를 생성하고 위치를 점프 직전 구간으로 조정
 // Box Collider, Is Trigger 설정
+```
