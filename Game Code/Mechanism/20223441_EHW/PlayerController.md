@@ -1,3 +1,7 @@
+# PlayerController 
+## 기능
+플레이어 캐릭터의 이동과 점프 동작을 제어한다.
+
 ```C++
 public class PlayerController : MonoBehaviour
 {
