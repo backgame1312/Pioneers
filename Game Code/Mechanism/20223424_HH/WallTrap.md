@@ -6,6 +6,7 @@
 ```c++
 public class WallTrap : MonoBehaviour
 {
+    [Header("Set in Inspector")]
     public Transform player; 
     public float activationDistance = 2f; 
     private BoxCollider wallCollider; 
