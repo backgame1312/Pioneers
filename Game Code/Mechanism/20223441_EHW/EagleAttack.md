@@ -1,3 +1,6 @@
+# EagleAttack
+## 기능
+일정 확률로 독수리가 플레이어를 낚아채 플레이어를 초기 위치로 되돌린다.
 ```C++
 public class EagleAttack : MonoBehaviour
 {
@@ -36,5 +39,21 @@ public class EagleAttack : MonoBehaviour
     }
 }
 ```
+
+## 주요 변수
+- *attackPercent* : 독수리가 플레이어를 낚아챌 확률을 조절한다).
+- *delayTime* : 게임 시작 후 독수리가 공격 가능해지기까지의 대기 시간을 설정한다.
+- *initialPosition* : 플레이어의 초기 위치를 저장한다.
+- *canAttack* : 독수리가 공격 가능한 상태인지 나타내는 bool 변수이다.
+  
+## 주요 메서드
+1. Start():
+    - 초기 위치를 설정하고 delayTime 후 독수리가 공격 가능하도록 설정한다.
+2. Update():
+    - canAttack가 true일 때, attackPercent에 따라 독수리가 플레이어를 낚아챈다.
+3. EnableAttack():
+    - canAttack를 true로 설정한다.
+4. AttackPlayer():
+    - 플레이어의 속도를 초기화하고, 플레이어를 초기 위치로 이동시킨다.
 
 + 초기 위치로 이동 시 안움직여지는 부분 수정 예정
