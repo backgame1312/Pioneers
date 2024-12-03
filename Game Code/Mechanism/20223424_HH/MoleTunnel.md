@@ -6,8 +6,8 @@
 ```C++
 public class MoleTunnel : MonoBehaviour
 {
+    [Header("Set in Inspector")]
     public GameObject player;
-
     public Vector3 minPosition;
     public Vector3 maxPosition;
 
