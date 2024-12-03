@@ -41,7 +41,7 @@ public class EagleAttack : MonoBehaviour
 ```
 
 ## 주요 변수
-- *attackPercent* : 독수리가 플레이어를 낚아챌 확률을 조절한다).
+- *attackPercent* : 독수리가 플레이어를 낚아챌 확률을 조절한다.
 - *delayTime* : 게임 시작 후 독수리가 공격 가능해지기까지의 대기 시간을 설정한다.
 - *initialPosition* : 플레이어의 초기 위치를 저장한다.
 - *canAttack* : 독수리가 공격 가능한 상태인지 나타내는 bool 변수이다.
