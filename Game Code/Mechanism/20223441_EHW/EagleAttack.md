@@ -2,17 +2,17 @@
 public class EagleAttack : MonoBehaviour
 {
     public float attackPercent = 0.5f; // 독수리가 플레이어를 잡을 확률
-    public float delayTime = 5f; // 게임 시작 후 독수리가 플레이어를 잡기까지 기다리는 시간
+    public float delayTime = 5f; // 게임 시작 후 플레이어를 잡기까지 기다리는 시간
     public Transform player;
-    public Vector2 initialPosition; // Vector2로 수정 (2D 환경에 맞게)
-    private bool canAttack = false; // 공격할 수 있는지 여부
+    public Vector2 initialPosition;
+    private bool canAttack = false;
 
-    private Rigidbody2D playerRb; // 플레이어의 Rigidbody2D를 참조
+    private Rigidbody2D playerRb;
 
     private void Start()
     {
         initialPosition = player.position; // 초기 위치 설정
-        playerRb = player.GetComponent<Rigidbody2D>(); // 플레이어의 Rigidbody2D 컴포넌트 가져오기
+        playerRb = player.GetComponent<Rigidbody2D>();
         Invoke("EnableAttack", delayTime); // 일정 시간 후 공격 가능
     }
 
@@ -26,7 +26,7 @@ public class EagleAttack : MonoBehaviour
 
     void EnableAttack()
     {
-        canAttack = true; // 일정 시간이 지나면 공격이 가능해짐
+        canAttack = true;
     }
 
     void AttackPlayer()
