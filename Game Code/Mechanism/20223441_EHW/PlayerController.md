@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
 - *moveSpeed* : 플레이어의 좌우 이동 속도를 설정한다.
 - *jumpForce* : 플레이어의 점프 힘을 설정한다.
 - *isGrounded* : 플레이어가 땅에 닿아 있는지를 판단하는 bool 변수. 점프 가능 여부를 결정한다.
+  
 ## 주요 메서드
 1. Start()
    - 스크립트가 처음 실행될 때 호출되며, playerRb를 초기화한다.
