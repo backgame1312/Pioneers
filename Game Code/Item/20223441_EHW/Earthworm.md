@@ -17,13 +17,13 @@ public class Earthworm : MonoBehaviour
             playerController = collision.GetComponent<PlayerController>();
             if (playerController != null)
             {
-                StartCoroutine(SpeedBoost());
+                StartCoroutine(ApplySpeedBoost());
                 Destroy(gameObject);
             }
         }
     }
 
-    private IEnumerator SpeedBoost()
+    private IEnumerator ApplySpeedBoost()
     {
         playerController.moveSpeed += speedBoost; // 속도 증가
         yield return new WaitForSeconds(boostDuration); // 지속 시간
