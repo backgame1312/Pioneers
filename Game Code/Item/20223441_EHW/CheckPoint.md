@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
 ## 주요 메서드
 1. OnTriggerEnter2D(Collider2D other)
-  - 플레이어가 체크포인트에 닿으면 lastCheckpointPosition에 현재 체크포인트 위치를 저장하고, isCheckpoint을 true로 설정한다.
+      - 플레이어가 체크포인트에 닿으면 lastCheckpointPosition에 현재 체크포인트 위치를 저장하고, isCheckpoint을 true로 설정한다.
 2. Respawn()
-  - 체크포인트가 설정되어 있다면 lastCheckpointPosition으로 이동한다.
-  - 체크포인트가 설정되지 않았다면 초기 위치로 리스폰한다.
+      - 체크포인트가 설정되어 있다면 lastCheckpointPosition으로 이동한다.
+      - 체크포인트가 설정되지 않았다면 초기 위치로 리스폰한다.
