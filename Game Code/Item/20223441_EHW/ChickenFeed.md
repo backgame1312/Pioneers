@@ -29,8 +29,8 @@ public class ChickenFeed : MonoBehaviour
 }
 ```
 
-## ChickenFollowPlayer
-### 기능
+# ChickenFollowPlayer
+## 기능
 생성된 닭들이 플레이어를 따라다니며 지정된 시간 후 사라진다.
 
 ## 코드
@@ -58,8 +58,8 @@ public class ChickenFollowPlayer : MonoBehaviour
 }
 ```
 
-## PushForce
-### 닭이 플레이어와 충돌했을 때 밀어내는 힘을 적용한다.
+# PushForce
+## 닭이 플레이어와 충돌했을 때 밀어내는 힘을 적용한다.
 
 ## 코드
 ```C++
