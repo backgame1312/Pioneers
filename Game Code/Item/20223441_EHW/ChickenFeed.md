@@ -85,26 +85,32 @@ public class PushForce : MonoBehaviour
 ```
 
 ## 주요 변수
+#### ChickenFeed
 - *chickens* : 닭 오브젝트 배열.
 - *player* : 닭이 추적할 플레이어의 좌표이다.
 
+#### ChickenFollowPlayer
 - *player* : 닭이 따라다닐 대상인 플레이어의 좌표이다.
 - *followSpeed* : 닭이 플레이어를 추적하는 속도이다.
 - *lifeTime* : 닭이 활성화된 뒤 일정 시간이 지나면 사라지도록 설정한다.
 
+#### PushForce
 - *pushForce* : 닭이 플레이어와 충돌했을 때 플레이어를 밀어내는 힘의 크기이다.
 
 ## 주요 메서드
+#### ChickenFeed
 1. ActivateChickens()
     - 닭 오브젝트를 활성화(SetActive(true))하고, 플레이어를 추적하도록 한다.
     - 호출 시 모든 닭이 플레이어를 따라 움직인다.
-
+    - 
+#### ChickenFollowPlayer
 2. Update()
     - Vector3.MoveTowards()를 사용해 닭이 지속적으로 플레이어를 추적하도록 한다.
 3. OnEnable()
     - 닭 오브젝트가 활성화될 때 실행한다.
     - Destroy(gameObject, lifeTime)으로 지정된 시간이 지나면 닭을 제거한다.
 
+#### PushForce
 4. OnCollisionEnter2D(Collision2D collision)
     - 닭과 플레이어가 충돌했을 때 실행한다.
     - 닭이 플레이어를 밀어내는 방향(pushDirection)을 계산한다.
