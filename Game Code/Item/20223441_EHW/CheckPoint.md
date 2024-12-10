@@ -21,7 +21,11 @@ public class CheckPoint : MonoBehaviour
 }
 ```
 
-## Respawn 기능 추가 (PlayerController)
+# PlayerController
+## 기능
+플레이어가 리스폰할 때 마지막 체크포인트로 이동하며, 체크포인트가 설정되지 않았으면 초기 위치로 리스폰한다.
+
+## 코드
 ```C++
 public class PlayerController : MonoBehaviour
 {
