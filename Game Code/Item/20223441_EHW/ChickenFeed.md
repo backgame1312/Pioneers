@@ -102,7 +102,7 @@ public class PushForce : MonoBehaviour
 1. ActivateChickens()
     - 닭 오브젝트를 활성화(SetActive(true))하고, 플레이어를 추적하도록 한다.
     - 호출 시 모든 닭이 플레이어를 따라 움직인다.
-    - 
+
 #### ChickenFollowPlayer
 2. Update()
     - Vector3.MoveTowards()를 사용해 닭이 지속적으로 플레이어를 추적하도록 한다.
