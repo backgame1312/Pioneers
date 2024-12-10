@@ -22,6 +22,7 @@ public class CheckPoint : MonoBehaviour
 ```
 
 ## Respawn 기능 추가 (PlayerController)
+```C++
 public class PlayerController : MonoBehaviour
 {
     private void Respawn()
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+```
 
 ## 주요 변수
 - *lastCheckpointPosition* : 마지막으로 활성화된 체크포인트의 위치를 저장한다.
