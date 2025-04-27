@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - SpeedUP
+  - Goal
+  - Peanut
+  - Larva
   layers:
   - Default
   - TransparentFX

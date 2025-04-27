@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 
     private int deathCount = 0;
     private float elapsed = 0.0f;
-
+    
     void Awake()
     {
         if (Instance == null) Instance = this;
