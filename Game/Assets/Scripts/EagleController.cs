@@ -30,6 +30,7 @@ public class EagleController : MonoBehaviour
         if (!isChasing && player.transform.position.x >= triggerXPosition)
         {
             isChasing = true;
+            AudioManager.Instance.PlayEagleCatch();
         }
 
         if (isChasing)

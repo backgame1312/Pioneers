@@ -29,6 +29,8 @@ public class SnakeObstacleController : MonoBehaviour
         if (!isRising && player.transform.position.x >= triggerXPosition && player.transform.position.x <= triggerMaximumXPositon)
         {
             isRising = true;
+            AudioManager.Instance.PlaySnakeAttack();
+
         }
 
         // 올라가는 동작

@@ -37,8 +37,12 @@ public class PlayerController : MonoBehaviour
     private TheAirObstacleController theAirObstacleController;
     private EagleController eagleController;
 
+    public Vector2 startingPosition = new Vector2(-6f, -0.1f);
+
     void Start()
     {
+        transform.position = startingPosition;
+
         rb = GetComponent<Rigidbody2D>();
 
         groundObstacleController = FindObjectOfType<GroundObstacleController>();
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 isGrounded = false;
+                AudioManager.Instance.PlayJump();
             }
             else if (isDoubleJumpEnabled && canDoubleJump)
             {
@@ -147,6 +152,7 @@ public class PlayerController : MonoBehaviour
         {
             HandleSpeedUP();
             other.gameObject.SetActive(false);
+            AudioManager.Instance.PlayItemGet();
         }
 
         if (other.CompareTag("Goal"))
@@ -158,12 +164,14 @@ public class PlayerController : MonoBehaviour
         {
             isDoubleJumpEnabled = true;
             other.gameObject.SetActive(false); // Peanut 오브젝트 비활성화
+            AudioManager.Instance.PlayItemGet();
         }
 
         if (other.CompareTag("Larva"))
         {
             StartCoroutine(ReduceSpeedTemporarily()); // Larva 태그와 충돌 시 속도 감소
             other.gameObject.SetActive(false);
+            AudioManager.Instance.PlayItemGet();
         }
     }
 

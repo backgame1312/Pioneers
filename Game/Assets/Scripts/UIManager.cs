@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
         elapseTimeGameObject.gameObject.SetActive(false);
 
         tutorialUI.SetActive(false);
+
+        AudioManager.Instance.StopBGM();
     }
 
     void Awake()
@@ -92,11 +94,16 @@ public class UIManager : MonoBehaviour
 
         if (!isFirstDeath)
             tutorialUI.SetActive(true);
+
+        AudioManager.Instance.PlayButtonClick();
+        AudioManager.Instance.PlayBGM();
     }
 
     public void OnExitButtonClicked()
     {
         Application.Quit();
+
+        AudioManager.Instance.PlayButtonClick();
     }
 
     void TogglePauseMenu()
@@ -106,21 +113,42 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         Time.timeScale = isPaused ? 0 : 1;
         tutorialUI.SetActive(false);
+
+        if (isPaused)
+        {
+            AudioManager.Instance.StopBGM();
+        }
+        else
+        {
+            AudioManager.Instance.PlayBGM();
+        }
     }
 
     public void ResumeGame()
     {
-        TogglePauseMenu(); 
+        TogglePauseMenu();
+
+        AudioManager.Instance.PlayButtonClick();
     }
 
     public void ReturnMainMenuButton()
     {
-        Time.timeScale = 1; 
+        Time.timeScale = 0;
+
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (player != null)
+        {
+            player.transform.position = player.startingPosition; 
+        }
+
         pauseUI.SetActive(false);
         mainMenu.SetActive(true);
 
         deathGameObject.gameObject.SetActive(false);
         elapseTimeGameObject.gameObject.SetActive(false);
+
+        AudioManager.Instance.PlayButtonClick();
+        AudioManager.Instance.PlayBGM();
     }
 
     void UpdateButton(Button btn, KeyCode key)
