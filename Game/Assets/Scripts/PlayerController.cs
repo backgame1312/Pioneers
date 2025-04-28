@@ -128,6 +128,8 @@ public class PlayerController : MonoBehaviour
         doubleJump.SetActive(true);
 
         speedDownItem.SetActive(true);
+
+        UIManager.Instance.OnPlayerDeath();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

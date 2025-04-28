@@ -2,17 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
     public TextMeshProUGUI death;
+    public GameObject deathGameObject;
+
     public TextMeshProUGUI elapseTime;
+    public GameObject elapseTimeGameObject;
+
+    public GameObject mainMenu;
+
+    public GameObject pauseUI; 
+    public GameObject resumeButton; 
+    public GameObject returnMainMenuButton; 
+    private bool isPaused = false;
 
     private int deathCount = 0;
     private float elapsed = 0.0f;
-    
+
+    public GameObject tutorialUI;
+    public Button buttonA, buttonD, buttonE, buttonSpace;
+    private bool isFirstDeath = false;
+
+    Color normal = new Color(1, 1, 1, 0.5f); // ¹ÝÅõ¸í
+    Color pressed = new Color(1, 1, 1, 1f);  // ºÒÅõ¸í
+
+    void Start()
+    {
+        pauseUI.SetActive(false);
+        mainMenu.SetActive(true);
+        Time.timeScale = 0;
+
+        deathGameObject.gameObject.SetActive(false);
+        elapseTimeGameObject.gameObject.SetActive(false);
+
+        tutorialUI.SetActive(false);
+    }
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -23,6 +53,16 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         UpdateElapsedTime();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseMenu();
+        }
+
+        UpdateButton(buttonA, KeyCode.A);
+        UpdateButton(buttonD, KeyCode.D);
+        UpdateButton(buttonE, KeyCode.E);
+        UpdateButton(buttonSpace, KeyCode.Space);
     }
 
     private void UpdateElapsedTime()
@@ -39,6 +79,63 @@ public class UIManager : MonoBehaviour
     public void UpdateDeathCount(int count)
     {
         deathCount = count;
-        death.text = "Á×Àº È½¼ö : " + deathCount;
+        death.text = " " + deathCount;
+    }
+
+    public void OnStartButtonClicked()
+    {
+        Time.timeScale = 1;
+        mainMenu.SetActive(false);
+
+        deathGameObject.gameObject.SetActive(true);
+        elapseTimeGameObject.gameObject.SetActive(true);
+
+        if (!isFirstDeath)
+            tutorialUI.SetActive(true);
+    }
+
+    public void OnExitButtonClicked()
+    {
+        Application.Quit();
+    }
+
+    void TogglePauseMenu()
+    {
+        isPaused = !isPaused;
+        pauseUI.SetActive(isPaused);
+        mainMenu.SetActive(false);
+        Time.timeScale = isPaused ? 0 : 1;
+        tutorialUI.SetActive(false);
+    }
+
+    public void ResumeGame()
+    {
+        TogglePauseMenu(); 
+    }
+
+    public void ReturnMainMenuButton()
+    {
+        Time.timeScale = 1; 
+        pauseUI.SetActive(false);
+        mainMenu.SetActive(true);
+
+        deathGameObject.gameObject.SetActive(false);
+        elapseTimeGameObject.gameObject.SetActive(false);
+    }
+
+    void UpdateButton(Button btn, KeyCode key)
+    {
+        var colors = btn.colors;
+        colors.normalColor = Input.GetKey(key) ? pressed : normal;
+        btn.colors = colors;
+    }
+
+    public void OnPlayerDeath()
+    {
+        if (!isFirstDeath)
+        {
+            tutorialUI.SetActive(false);
+            isFirstDeath = true;
+        }
     }
 }
