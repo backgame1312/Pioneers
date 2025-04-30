@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
 
     [Header("Y-axis Movement Settings")]
     public float followThresholdY = 12f; // 플레이어 Y값이 이 값을 넘으면 카메라가 Y축을 따라감
-    private float fixedY = 5f; // 고정된 Y값
+    private float fixedY = 0; // 고정된 Y값
 
     private float currentY; // 카메라의 현재 Y값 (부드러운 이동을 위한 변수)
 

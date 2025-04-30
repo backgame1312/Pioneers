@@ -60,7 +60,7 @@ public class EagleAttackController : MonoBehaviour
     // 플레이어와 충돌 시 독수리 비활성화 및 플레이어 사망 처리
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Chicken"))
         {
             gameObject.SetActive(false); // 독수리 비활성화
             playerController.Die(); // 플레이어 사망 처리

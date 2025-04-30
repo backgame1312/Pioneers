@@ -8,7 +8,7 @@ public class DisappearingPlatform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Chicken"))
         {
             // 장애물이 플레이어와 충돌하면 비활성화
             gameObject.SetActive(false);

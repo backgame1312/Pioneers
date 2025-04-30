@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
     {
         switch (other.tag)
         {
-            case "SpeedUP":
+            case "Earthwarm":
                 HandleSpeedUP();
                 break;
             case "Goal":
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 공통 처리: 아이템 비활성화 + 사운드
-        if (other.CompareTag("SpeedUP") || other.CompareTag("Peanut") || other.CompareTag("Larva"))
+        if (other.CompareTag("Earthwarm") || other.CompareTag("Peanut") || other.CompareTag("Larva"))
         {
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
