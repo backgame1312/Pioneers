@@ -285,7 +285,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "DeathUI(\uBC16)_0": 4109498533207745236
+      "DeathUI(\uBC16)_1": -1970557011920115284
+      "DeathUI(\uBC16)_2": -1660921300248266738
+      "DeathUI(\uBC16)_3": 6895702540805842128
+      "DeathUI(\uBC16)_4": -130906624268051109
+      "DeathUI(\uBC16)_5": -2696883112870033311
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

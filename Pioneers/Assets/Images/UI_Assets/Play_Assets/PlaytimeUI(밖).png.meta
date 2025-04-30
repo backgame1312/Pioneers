@@ -385,7 +385,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "PlaytimeUI(\uBC16)_0": 2114956802966839275
+      "PlaytimeUI(\uBC16)_1": 6811422838076786178
+      "PlaytimeUI(\uBC16)_2": -8863101432710521699
+      "PlaytimeUI(\uBC16)_3": 3939740316418574694
+      "PlaytimeUI(\uBC16)_4": 4024072312525041905
+      "PlaytimeUI(\uBC16)_5": 6771469755170403336
+      "PlaytimeUI(\uBC16)_6": -5609892618388633907
+      "PlaytimeUI(\uBC16)_7": 7531186456257255365
+      "PlaytimeUI(\uBC16)_8": 977078582834501144
+      "PlaytimeUI(\uBC16)_9": -5158022738023252402
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
