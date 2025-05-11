@@ -7,8 +7,9 @@ TagManager:
   - Earthwarm
   - Larva
   - Peanut
-  - Chicken
   - Ground
+  - Goal
+  - DisappearingPlatform
   layers:
   - Default
   - TransparentFX
@@ -18,9 +19,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - DisaapearPlatform
+  - Enemy
   - 
   - 
   - 

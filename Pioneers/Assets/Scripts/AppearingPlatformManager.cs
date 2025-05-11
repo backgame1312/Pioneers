@@ -12,7 +12,7 @@ public class AppearingPlatformManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Chicken"); // 플레이어를 찾기
+        player = GameObject.FindGameObjectWithTag("Player"); // 플레이어를 찾기
 
         // 시작 시 모든 플랫폼을 비활성화
         foreach (var platform in platformsToActivate)

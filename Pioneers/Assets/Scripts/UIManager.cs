@@ -147,7 +147,7 @@ public class UIManager : MonoBehaviour
         PlayerController player = FindAnyObjectByType<PlayerController>();
         if (player != null)
         {
-            player.transform.position = player.startPosition; // 시작 위치로 복귀
+            player.transform.position = player.startingPosition; // 시작 위치로 복귀
         }
 
         pauseMenuUI.SetActive(false);
