@@ -9,26 +9,33 @@ public class AppearingPlatformManager : MonoBehaviour
     public float[] activationXPositions; // 각 플랫폼을 활성화할 X 좌표 배열
 
     private GameObject player;
+    private bool[] hasActivated; // 각 플랫폼이 이미 한 번 활성화되었는지 기록
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // 플레이어를 찾기
 
-        // 시작 시 모든 플랫폼을 비활성화
-        foreach (var platform in platformsToActivate)
+        hasActivated = new bool[platformsToActivate.Length];
+        for (int i = 0; i < platformsToActivate.Length; i++)
         {
-            platform.SetActive(false);
+            platformsToActivate[i].SetActive(false);
+            hasActivated[i] = false;
         }
     }
 
     void Update()
     {
-        // 각 플랫폼의 X 좌표를 기준으로 활성화 여부 체크
         for (int i = 0; i < platformsToActivate.Length; i++)
         {
-            if (player.transform.position.x > activationXPositions[i] && !platformsToActivate[i].activeInHierarchy)
+            // 이미 한 번 활성화한 플랫폼은 무시
+            if (hasActivated[i]) continue;
+
+            // 아직 한 번도 활성화 안 됐고, 조건 충족하면 활성화
+            if (player.transform.position.x > activationXPositions[i] &&
+                !platformsToActivate[i].activeInHierarchy)
             {
-                platformsToActivate[i].SetActive(true); // 해당 X좌표를 넘으면 플랫폼 활성화
+                platformsToActivate[i].SetActive(true);
+                hasActivated[i] = true; // 활성화 기록
             }
         }
     }
@@ -36,9 +43,10 @@ public class AppearingPlatformManager : MonoBehaviour
     // 필요한 경우, 모든 플랫폼을 다시 비활성화하는 메서드
     public void RestoreObstacle()
     {
-        foreach (var platform in platformsToActivate)
+        for (int i = 0; i < platformsToActivate.Length; i++)
         {
-            platform.SetActive(false); // 모든 플랫폼 비활성화
+            platformsToActivate[i].SetActive(false);
+            hasActivated[i] = false;
         }
     }
 }
