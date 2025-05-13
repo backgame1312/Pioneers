@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 10.0f;
     public float speedUPAmount = 10.0f;
+    private float moveInput;
 
     [Header("Jump Tuning")]
     public float jumpForce = 5.0f;
@@ -57,12 +57,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        moveInput = Input.GetAxisRaw("Horizontal"); 
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
         MovementController();
         JumpGravity();
         CheckFallDeath();
 
         animator.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
         animator.SetBool("IsGrounded", isGrounded);
+    }
+
+    void FixedUpdate()
+    {
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
     private void MovementController()
