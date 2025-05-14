@@ -57,15 +57,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        moveInput = Input.GetAxisRaw("Horizontal"); 
+        moveInput = Input.GetAxisRaw("Horizontal");
+
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
+        animator.SetBool("IsGrounded", isGrounded);
 
         MovementController();
         JumpGravity();
         CheckFallDeath();
-
-        animator.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
-        animator.SetBool("IsGrounded", isGrounded);
     }
 
     void FixedUpdate()
