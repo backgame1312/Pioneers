@@ -11,6 +11,7 @@ TagManager:
   - Goal
   - DisappearingPlatform
   - Mushroom
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -20,10 +21,10 @@ TagManager:
   - UI
   - 
   - 
+  - Particle
   - Player
-  - DisaapearPlatform
+  - Platform
   - Enemy
-  - 
   - 
   - 
   - 
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 34125247
+    locked: 0
+  - name: Particle
+    uniqueID: 4217854321
     locked: 0
   m_RenderingLayers:
   - Default

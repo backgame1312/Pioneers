@@ -66,9 +66,10 @@ public class EagleAttackController : MonoBehaviour
 
     public void RestoreObstacle()
     {
-        transform.position = new Vector2(Xposition, Yposition);
-        gameObject.SetActive(true);
+        Debug.Log("Eagle º¹¿øµÊ");
         isChasing = false;
         targetPosition = new Vector2(70, 2);
+        transform.position = new Vector2(Xposition, Yposition);
+        gameObject.SetActive(true);
     }
 }

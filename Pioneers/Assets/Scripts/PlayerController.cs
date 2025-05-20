@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Respawn Settings")]
     public float deathY = -10.0f;
-    private Vector2 respawnPosition = new Vector2(-5f, -2f);
     private int deathCount = 0;
 
     [Header("Movement Settings")]
@@ -40,12 +39,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
-    public Vector2 startingPosition = new Vector2(-5f, -2f);
-
     void Start()
     {
-        transform.position = startingPosition;
-
         rb = GetComponent<Rigidbody2D>();
 
         disappearingPlatform = FindAnyObjectByType<DisappearingPlatform>();
@@ -127,10 +122,6 @@ public class PlayerController : MonoBehaviour
         deathCount++;
         Debug.Log("플레이어가 죽었습니다. 죽은 횟수: " + deathCount);
 
-        transform.position = respawnPosition;
-
-        rb.linearVelocity = Vector2.zero;
-
         if (UIManager.Instance != null) // UIManager가 null이 아닐 때만 호출
         {
             UIManager.Instance.UpdateDeathCount(deathCount);
@@ -141,76 +132,41 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("UIManager가 초기화되지 않았습니다.");
         }
 
-        if (speedUPItem != null) // speedUPItem이 null이 아닐 때만 호출
+        if (GameManager.Instance != null)
         {
-            speedUPItem.SetActive(true);
+            GameManager.Instance.HandlePlayerDeath(transform.position);
         }
-        else
-        {
-            Debug.LogWarning("speedUPItem이 할당되지 않았습니다.");
-        }
+    }
 
-        // 각 플랫폼 관리자가 null이 아니면 복원 호출
-        if (disappearingPlatform != null)
-        {
-            disappearingPlatform.RestoreObstacle();
-        }
-        else
-        {
-            Debug.LogWarning("DisappearingPlatform이 할당되지 않았습니다.");
-        }
+    public void RestoreAllObstacles()
+    {
+        if (eagleAttackController != null)
+            eagleAttackController.RestoreObstacle();
 
         if (appearingPlatformManager != null)
-        {
             appearingPlatformManager.RestoreObstacle();
-        }
-        else
-        {
-            Debug.LogWarning("AppearingPlatformManager가 할당되지 않았습니다.");
-        }
 
-        if (eagleAttackController != null)
+        if (disappearingPlatform != null)
+            disappearingPlatform.RestoreObstacle();
+
+        // 아이템들도 포함
+        if (speedUPItem != null)
+            speedUPItem.SetActive(true);
+        if (speedDownItem != null)
+            speedDownItem.SetActive(true);
+        if (weakenedJumpItem != null)
+            weakenedJumpItem.SetActive(true);
+        if (doubleJumpItems != null)
         {
-            eagleAttackController.RestoreObstacle();
-        }
-        else
-        {
-            Debug.LogWarning("EagleAttackController가 할당되지 않았습니다.");
+            foreach (GameObject item in doubleJumpItems)
+                if (item != null)
+                    item.SetActive(true);
         }
 
         isDoubleJumpEnabled = false;
         canDoubleJump = false;
 
-        if (doubleJumpItems != null && doubleJumpItems.Count > 0)
-        {
-            foreach (GameObject peanut in doubleJumpItems)
-            {
-                if (peanut != null)
-                    peanut.SetActive(true);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("doubleJumpItems 리스트가 비어있거나 null입니다.");
-        }
-
-        if (speedDownItem != null) // speedDownItem이 null이 아닐 때만 호출
-        {
-            speedDownItem.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("SpeedDownItem이 할당되지 않았습니다.");
-        }
-
-        if (weakenedJumpItem != null) // weakenedJumpItem이 null이 아닐 때만 호출
-        {
-            weakenedJumpItem.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("WeakenedJumpItem이 할당되지 않았습니다.");
-        }
+        Debug.Log("플레이어 장애물 복원 완료");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -283,6 +239,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator LoadNextSceneWithDelay()
     {
         yield return new WaitForSeconds(3f); // 3초 기다리고
-        SceneManager.LoadScene("1-2");        // 3초 후에 씬 이동
+        SceneManager.LoadScene("Game");        // 3초 후에 씬 이동
     }
 }
