@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Settings")]
     public float moveSpeed = 10.0f;
-    public float speedUPAmount = 10.0f;
+    public float speedUPAmount = 200.0f;
     private float moveInput;
 
     [Header("Jump Tuning")]
@@ -22,32 +22,50 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded = false;
-    private bool isSpeedUP = false;
     private bool isDoubleJumpEnabled = false;
     private bool canDoubleJump = false;
     private bool isWeakenedJump = false;
 
     [Header("Items")]
-    public GameObject speedUPItem;
+    public List<GameObject> speedUPItems;
     public List<GameObject> doubleJumpItems;
-    public GameObject speedDownItem;
-    public GameObject weakenedJumpItem;
+    public List<GameObject> speedDownItems;
+    public List<GameObject> weakenedJumpItems;
 
-    private DisappearingPlatform disappearingPlatform;
+    private DisappearingPlatformManager disappearingPlatformManager;
     private AppearingPlatformManager appearingPlatformManager;
-    private EagleAttackController eagleAttackController;
+    private FallingAttackManager fallingAttackManager;
+    private JumpObstacleManager jumpObstacleManager;
+    private FallingPlatform[] fallingPlatforms;
+    private SpikeBlockActivator[] spikeBlockActivators;
+    private RisingPlatform[] risingPlatforms;
+    private EagleAttackController[] eagleAttackControllers;
+    private MoleAttackController[] moleAttackControllers;
 
     private Animator animator;
+
+    public CharacterFaceManager faceManager;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        disappearingPlatform = FindAnyObjectByType<DisappearingPlatform>();
+        disappearingPlatformManager = FindAnyObjectByType<DisappearingPlatformManager>();
         appearingPlatformManager = FindAnyObjectByType<AppearingPlatformManager>();
-        eagleAttackController = FindAnyObjectByType<EagleAttackController>();
+        fallingAttackManager = FindAnyObjectByType<FallingAttackManager>();
+        jumpObstacleManager = FindAnyObjectByType<JumpObstacleManager>();
+        fallingPlatforms = FindObjectsByType<FallingPlatform>(FindObjectsSortMode.None);
+        spikeBlockActivators = FindObjectsByType<SpikeBlockActivator>(FindObjectsSortMode.None);
+        risingPlatforms = FindObjectsByType<RisingPlatform>(FindObjectsSortMode.None);
+        eagleAttackControllers = FindObjectsByType<EagleAttackController>(FindObjectsSortMode.None);
+        moleAttackControllers = FindObjectsByType<MoleAttackController>(FindObjectsSortMode.None);
 
         animator = GetComponent<Animator>();
+
+        if (faceManager != null)
+        {
+            faceManager.ShowBasic();
+        }
     }
 
     void Update()
@@ -60,6 +78,11 @@ public class PlayerController : MonoBehaviour
         MovementController();
         JumpGravity();
         CheckFallDeath();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void FixedUpdate()
@@ -136,37 +159,101 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.HandlePlayerDeath(transform.position);
         }
+
+        if (faceManager != null)
+        {
+            faceManager.ShowFall();
+        }
     }
 
     public void RestoreAllObstacles()
-    {
-        if (eagleAttackController != null)
-            eagleAttackController.RestoreObstacle();
+    { 
+
+        if (fallingAttackManager != null)
+        {
+            fallingAttackManager.RestoreObstacles();
+        }
+
+        if (disappearingPlatformManager != null)
+        {
+            disappearingPlatformManager.RestoreObstacle();
+        }
 
         if (appearingPlatformManager != null)
+        {
             appearingPlatformManager.RestoreObstacle();
+        }
 
-        if (disappearingPlatform != null)
-            disappearingPlatform.RestoreObstacle();
+        if (jumpObstacleManager != null)
+        {
+            jumpObstacleManager.RestoreObstacle();
+        }
+
+        if (fallingPlatforms != null)
+        {
+            foreach (var platform in fallingPlatforms)
+            {
+                if (platform != null)
+                    platform.RestoreObstacle();
+            }
+        }
+
+        if (spikeBlockActivators != null)
+        {
+            foreach (var spikePlatform in spikeBlockActivators)
+            {
+                if (spikePlatform != null)
+                    spikePlatform.RestoreObstacle();
+            }
+        }
+
+        if (risingPlatforms != null)
+        {
+            foreach (var risingPlatform in risingPlatforms)
+            {
+                if (risingPlatform != null)
+                    risingPlatform.RestoreObstacle();
+            }
+        }
+
+        if (eagleAttackControllers != null)
+        {
+            foreach (var eagle in eagleAttackControllers)
+            {
+                if (eagle != null)
+                    eagle.RestoreObstacle();
+            }
+        }
+
+        if (moleAttackControllers != null)
+        {
+            foreach (var mole in moleAttackControllers)
+            {
+                if (mole != null)
+                    mole.RestoreObstacle();
+            }
+        }
 
         // 아이템들도 포함
-        if (speedUPItem != null)
-            speedUPItem.SetActive(true);
-        if (speedDownItem != null)
-            speedDownItem.SetActive(true);
-        if (weakenedJumpItem != null)
-            weakenedJumpItem.SetActive(true);
-        if (doubleJumpItems != null)
-        {
-            foreach (GameObject item in doubleJumpItems)
-                if (item != null)
-                    item.SetActive(true);
-        }
+        RestoreItemList(speedUPItems);
+        RestoreItemList(speedDownItems);
+        RestoreItemList(weakenedJumpItems);
+        RestoreItemList(doubleJumpItems);
 
         isDoubleJumpEnabled = false;
         canDoubleJump = false;
 
         Debug.Log("플레이어 장애물 복원 완료");
+    }
+    private void RestoreItemList(List<GameObject> itemList)
+    {
+        if (itemList == null) return;
+
+        foreach (GameObject item in itemList)
+        {
+            if (item != null)
+                item.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -212,11 +299,15 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
         }
+
+        if (other.CompareTag("Egg"))
+        {
+            Destroy(other.gameObject);  // 태그가 Egg인 오브젝트 파괴
+        }
     }
 
     private void HandleSpeedUP()
     {
-        isSpeedUP = true;
         moveSpeed += speedUPAmount;
         StartCoroutine(SpeedUpCoroutine());
     }
@@ -225,7 +316,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         moveSpeed -= speedUPAmount;
-        isSpeedUP = false;
     }
 
     private IEnumerator ReduceSpeedTemporarily()

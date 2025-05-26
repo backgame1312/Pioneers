@@ -64,15 +64,30 @@
     <Compile Include="Assets\Scripts\MainMenuUI.cs" />
     <Compile Include="Assets\Scripts\ClearPlatformController.cs" />
     <Compile Include="Assets\Scripts\SnakeAttackController.cs" />
+    <Compile Include="Assets\Scripts\FallingAttack.cs" />
+    <Compile Include="Assets\Scripts\SpeechBubble.cs" />
+    <Compile Include="Assets\Scripts\EventBlock.cs" />
+    <Compile Include="Assets\Scripts\MoleAttackController.cs" />
+    <Compile Include="Assets\Scripts\SpikeBlockActivator.cs" />
+    <Compile Include="Assets\Scripts\DeathTrigger.cs" />
     <Compile Include="Assets\Scripts\DisappearingPlatform.cs" />
     <Compile Include="Assets\Scripts\ParticleManager.cs" />
+    <Compile Include="Assets\Scripts\DisappearingPlatformManager.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\ItemTooltip.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
+    <Compile Include="Assets\Scripts\FallingPlatform.cs" />
     <Compile Include="Assets\Scripts\EagleAttackController.cs" />
+    <Compile Include="Assets\Scripts\JumpObstacleManager.cs" />
+    <Compile Include="Assets\Scripts\CharacterFaceManager.cs" />
+    <Compile Include="Assets\Scripts\SpikeAttack.cs" />
     <Compile Include="Assets\Scripts\MovingFlatformController.cs" />
+    <Compile Include="Assets\Scripts\RisingPlatform.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MoleHoleTeleporter.cs" />
     <Compile Include="Assets\Scripts\AppearingPlatformManager.cs" />
+    <Compile Include="Assets\Scripts\FallingAttackManager.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
