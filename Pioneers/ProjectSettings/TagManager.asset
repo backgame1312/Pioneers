@@ -12,6 +12,7 @@ TagManager:
   - DisappearingPlatform
   - Mushroom
   - FxTemporaire
+  - Egg
   layers:
   - Default
   - TransparentFX
