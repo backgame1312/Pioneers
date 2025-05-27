@@ -8873,7 +8873,7 @@ MonoBehaviour:
   basicImage: {fileID: 93426498}
   debuffImage: {fileID: 1396152433}
   buffImage: {fileID: 455848020}
-  fallImage: {fileID: 1142611242}
+  dieImage: {fileID: 1142611242}
   clearImage: {fileID: 1850284785}
 --- !u!1 &1012889219
 GameObject:
@@ -13126,7 +13126,7 @@ PrefabInstance:
       addedObject: {fileID: 2144855878}
     - targetCorrespondingSourceObject: {fileID: 9222447543819428740, guid: b80e9c8026b1e86479c1811c48c6a4cd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2144855881}
+      addedObject: {fileID: 2144855885}
   m_SourcePrefab: {fileID: 100100000, guid: b80e9c8026b1e86479c1811c48c6a4cd, type: 3}
 --- !u!1001 &1480280563
 PrefabInstance:
@@ -17274,7 +17274,12 @@ PolygonCollider2D:
       - {x: 1.5847623, y: -1.2167736}
       - {x: 1.7877569, y: -1.0645295}
   m_UseDelaunayMesh: 0
---- !u!114 &2144855881
+--- !u!4 &2144855883 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5555843397591076155, guid: b80e9c8026b1e86479c1811c48c6a4cd, type: 3}
+  m_PrefabInstance: {fileID: 1456855242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2144855885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17286,11 +17291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2b6287a4b1d1145a5aa1d430b214b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2144855883 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5555843397591076155, guid: b80e9c8026b1e86479c1811c48c6a4cd, type: 3}
-  m_PrefabInstance: {fileID: 1456855242}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &924483960918213039
 PrefabInstance:
   m_ObjectHideFlags: 0

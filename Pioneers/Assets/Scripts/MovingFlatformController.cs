@@ -19,7 +19,7 @@ public class MovingPlatformController : MonoBehaviour
     {
         if (balloonHint == null)
         {
-            balloonHint = GetComponentInChildren<BalloonHint>(true)?.gameObject;
+            balloonHint = GetComponentInChildren<SpeechBubble>(true)?.gameObject;
         }
     }
     void Update()

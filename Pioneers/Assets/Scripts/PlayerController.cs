@@ -234,6 +234,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        DisappearingPlatform[] platforms = FindObjectsOfType<DisappearingPlatform>();
+        foreach (DisappearingPlatform platform in platforms)
+        {
+            platform.RestoreObstacle();
+        }
+
         // 아이템들도 포함
         RestoreItemList(speedUPItems);
         RestoreItemList(speedDownItems);

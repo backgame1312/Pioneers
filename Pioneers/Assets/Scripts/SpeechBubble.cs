@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BalloonHint : MonoBehaviour
+public class SpeechBubble : MonoBehaviour
 {
     public enum BalloonType { Question, Exclamation }
     public BalloonType type;

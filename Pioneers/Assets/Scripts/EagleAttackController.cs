@@ -1,56 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EagleAttackController : MonoBehaviour
 {
     [Header("Eagle Settings")]
-    public GameObject player; // 플레이어
-    public float triggerXPosition = 100.0f; // 독수리가 추적을 시작하는 X값
-    public float eagleSpeed = 50.0f; // 독수리 속도
+    public GameObject player;
+    public float triggerXPosition = 100.0f;
+    public float eagleSpeed = 50.0f;
 
     [Header("Initial Position")]
-    public float Xposition = 121.0f; // 독수리의 초기 X값
-    public float Yposition = 20.5f; // 독수리의 초기 Y값
+    public float Xposition = 121.0f;
+    public float Yposition = 20.5f;
 
     [Header("Movement Target Positions")]
-    public Vector2 targetPosition = new Vector2(100, 1); // 독수리가 이동할 첫 번째 목표 위치
-    public Vector2 destroyPosition = new Vector2(80, 20.5f); // 독수리가 이동할 두 번째 목표 위치
+    public Vector2 targetPosition = new Vector2(100, 1);
+    public Vector2 destroyPosition = new Vector2(80, 20.5f);
 
-    private bool isChasing = false; // 추적 상태 확인
-
+    private bool isChasing = false;
     private PlayerController playerController;
 
-    // Start is called before the first frame update
+    private SpeechBubble speechBubble; // ← 추가
+
     void Start()
     {
         playerController = player.GetComponent<PlayerController>();
+        speechBubble = GetComponentInChildren<SpeechBubble>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isChasing && player.transform.position.x >= triggerXPosition)
         {
             isChasing = true;
             AudioManager.Instance.PlayEagleCatch();
+
+            if (speechBubble != null && speechBubble.type == SpeechBubble.BalloonType.Exclamation)
+            {
+                speechBubble.HideBalloon();
+            }
         }
 
         if (isChasing)
         {
-            // 1번 좌표(targetPosition)로 이동
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, eagleSpeed * Time.deltaTime);
 
-            // 1번 좌표에 도달하면 2번 좌표(destroyPosition)로 이동
             if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
             {
-                targetPosition = destroyPosition; // 2번 좌표로 변경
+                targetPosition = destroyPosition;
             }
 
-            // 2번 좌표에 도달하면 독수리 비활성화
             if (Vector2.Distance(transform.position, destroyPosition) < 0.1f)
             {
-                gameObject.SetActive(false); // 독수리 비활성화
+                gameObject.SetActive(false);
             }
         }
     }
@@ -71,5 +71,10 @@ public class EagleAttackController : MonoBehaviour
         targetPosition = new Vector2(75, -3);
         transform.position = new Vector2(Xposition, Yposition);
         gameObject.SetActive(true);
+
+        if (speechBubble != null)
+        {
+            speechBubble.gameObject.SetActive(true); 
+        }
     }
 }

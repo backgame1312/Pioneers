@@ -81,5 +81,7 @@ public class GameManager : MonoBehaviour
         {
             playerController.RestoreAllObstacles(); // 복원 호출
         }
+
+        FindObjectOfType<DisappearingPlatformManager>()?.RestoreObstacle();
     }
 }
