@@ -20,8 +20,8 @@ public class FallingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // 떨어지는 상태로 변경
             rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 3f; // 기본은 1.0, 더 크게 하면 더 빠르게 떨어짐
         }
     }
 

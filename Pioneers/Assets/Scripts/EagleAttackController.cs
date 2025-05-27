@@ -68,7 +68,7 @@ public class EagleAttackController : MonoBehaviour
     {
         Debug.Log("Eagle º¹¿øµÊ");
         isChasing = false;
-        targetPosition = new Vector2(75, -3);
+        targetPosition = new Vector2(270, -3);
         transform.position = new Vector2(Xposition, Yposition);
         gameObject.SetActive(true);
 

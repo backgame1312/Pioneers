@@ -6,15 +6,10 @@ public class DeathTrigger : MonoBehaviour
     {
         Debug.Log("트리거에 닿은 객체 이름: " + other.name);
 
-        if (other.CompareTag("Player"))
+        Transform root = other.transform.root;
+        if (root.CompareTag("Player"))
         {
-            // PlayerController 컴포넌트가 콜라이더에 없을 경우 부모에서 찾기
-            PlayerController playerController = other.GetComponent<PlayerController>();
-            if (playerController == null)
-            {
-                playerController = other.GetComponentInParent<PlayerController>();
-            }
-
+            PlayerController playerController = root.GetComponent<PlayerController>();
             if (playerController != null)
             {
                 playerController.Die();
