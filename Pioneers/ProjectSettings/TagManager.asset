@@ -13,6 +13,7 @@ TagManager:
   - Mushroom
   - FxTemporaire
   - Egg
+  - Egg_Obstacle
   layers:
   - Default
   - TransparentFX

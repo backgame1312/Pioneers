@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9cca6995a2f48e74dbc70ab52cf09d97
+guid: 8247547524045474094d74303b9ef8f0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1336809692955082325
-    second: Background_2_0
+      213: 8769549347541133393
+    second: Mole_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Background_2_0
+      name: Mole_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 4320
-        height: 2160
+        x: 33
+        y: 21
+        width: 149
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55ef2e0455d4d8210800000000000000
-      internalID: 1336809692955082325
+      spriteID: 158a2742ba2b3b970800000000000000
+      internalID: 8769549347541133393
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Background_2_0: 1336809692955082325
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

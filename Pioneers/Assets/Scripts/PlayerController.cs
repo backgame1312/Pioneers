@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Settings")]
     public float moveSpeed = 10.0f;
-    public float speedUPAmount = 200.0f;
+    public float speedChangeAmount = 200.0f;
     private float moveInput;
 
     [Header("Jump Tuning")]
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> doubleJumpItems;
     public List<GameObject> speedDownItems;
     public List<GameObject> weakenedJumpItems;
+    public List<GameObject> eggObstacles;
 
     private DisappearingPlatformManager disappearingPlatformManager;
     private AppearingPlatformManager appearingPlatformManager;
@@ -167,8 +168,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void RestoreAllObstacles()
-    { 
-
+    {
         if (fallingAttackManager != null)
         {
             fallingAttackManager.RestoreObstacles();
@@ -239,6 +239,7 @@ public class PlayerController : MonoBehaviour
         RestoreItemList(speedDownItems);
         RestoreItemList(weakenedJumpItems);
         RestoreItemList(doubleJumpItems);
+        RestoreItemList(eggObstacles);
 
         isDoubleJumpEnabled = false;
         canDoubleJump = false;
@@ -288,7 +289,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Larva"))
         {
-            StartCoroutine(ReduceSpeedTemporarily()); // Larva 태그와 충돌 시 속도 감소
+            ReduceSpeedTemporarily(); // Larva 태그와 충돌 시 속도 감소
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
         }
@@ -304,26 +305,36 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);  // 태그가 Egg인 오브젝트 파괴
         }
+
+        if (other.CompareTag("Egg_Obstacle"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 
     private void HandleSpeedUP()
     {
-        moveSpeed += speedUPAmount;
+        moveSpeed += speedChangeAmount;
         StartCoroutine(SpeedUpCoroutine());
     }
 
     private IEnumerator SpeedUpCoroutine()
     {
         yield return new WaitForSeconds(5f);
-        moveSpeed -= speedUPAmount;
+        moveSpeed -= speedChangeAmount;
     }
 
-    private IEnumerator ReduceSpeedTemporarily()
+    private void ReduceSpeedTemporarily()
+    {
+        moveSpeed -= speedChangeAmount; ; // 속도 절반으로 줄이기
+        StartCoroutine(SpeedDownCoroutine());
+    }
+
+    private IEnumerator SpeedDownCoroutine()
     {
         float originalSpeed = moveSpeed;
-        moveSpeed /= 2; // 속도 절반으로 줄이기
-        yield return new WaitForSeconds(3f); // 3초 후
-        moveSpeed = originalSpeed; // 원래 속도로 복원
+        yield return new WaitForSeconds(5f);
+        moveSpeed = originalSpeed;
     }
 
     private IEnumerator LoadNextSceneWithDelay()

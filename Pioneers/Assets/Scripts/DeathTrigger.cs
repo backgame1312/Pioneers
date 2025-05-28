@@ -21,5 +21,5 @@ public class DeathTrigger : MonoBehaviour
             }
         }
     }
-
 }
+

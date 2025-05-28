@@ -10,27 +10,40 @@ public class FallingPlatform : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         originalPosition = transform.position;
 
-        // Ã³À½¿£ °íÁ¤ »óÅÂ·Î
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
     }
 
+    // íŠ¸ë¦¬ê±° ê°ì§€
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Fall();
+        }
+    }
+
+    // ì¶©ëŒ ê°ì§€
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            rb.bodyType = RigidbodyType2D.Dynamic;
-            rb.gravityScale = 3f; // ±âº»Àº 1.0, ´õ Å©°Ô ÇÏ¸é ´õ ºü¸£°Ô ¶³¾îÁü
+            Fall();
         }
     }
 
+    // ê³µí†µìœ¼ë¡œ ë–¨ì–´ì§€ëŠ” ë™ì‘ ì²˜ë¦¬
+    private void Fall()
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 3f;
+    }
+
+    // ë˜ëŒë¦¬ê¸°
     public void RestoreObstacle()
     {
-        // À§Ä¡ ÃÊ±âÈ­
         transform.position = originalPosition;
-
-        // ´Ù½Ã °íÁ¤ »óÅÂ·Î ¹Ù²Ş
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
