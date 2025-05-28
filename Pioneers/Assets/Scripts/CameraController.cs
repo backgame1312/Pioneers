@@ -13,14 +13,15 @@ public class CameraController : MonoBehaviour
 
     [Header("Y-axis Movement Settings")]
     public float followThresholdY = 12f; // 플레이어 Y값이 이 값을 넘으면 카메라가 Y축을 따라감
-    private float fixedY = 5; // 고정된 Y값
+    private float minY = 10; // 고정된 Y값
+    private float maxY = 22;
 
     private float currentY; // 카메라의 현재 Y값 (부드러운 이동을 위한 변수)
 
     void Start()
     {
         // 카메라 Y값을 고정 위치로 초기화
-        currentY = fixedY;
+        currentY = minY;
     }
 
     void LateUpdate()
@@ -41,7 +42,10 @@ public class CameraController : MonoBehaviour
         float targetX = Mathf.Clamp(target.position.x + offset.x, minX, maxX);
 
         // Y 값은 고정된 값 또는 플레이어 Y값이 일정 값 이상일 때 따라가도록 설정
-        float targetY = (target.position.y > followThresholdY) ? target.position.y : fixedY;
+        float targetY = (target.position.y > followThresholdY) ? target.position.y : minY;
+
+        // 최대 Y값 제한 추가
+        targetY = Mathf.Clamp(targetY, float.MinValue, maxY);
 
         // Y값을 부드럽게 보간
         currentY = Mathf.Lerp(currentY, targetY, speed * Time.deltaTime);
