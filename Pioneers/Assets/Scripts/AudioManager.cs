@@ -14,22 +14,26 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip jumpClip;
     [SerializeField] private AudioClip bgmClip;
 
+    private float bgmVolume = 1f;
+    private float sfxVolume = 1f;
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        SetBGMVolume(bgmVolume);
+        SetSFXVolume(sfxVolume);
     }
 
-    /// <summary>
-    /// 효과음을 재생한다.
-    /// </summary>
     public void PlaySFX(AudioClip clip)
     {
         if (clip == null || sfxSource == null)
@@ -38,12 +42,9 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        sfxSource.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip, sfxVolume);
     }
 
-    /// <summary>
-    /// 배경음악을 재생한다.
-    /// </summary>
     public void PlayBGM()
     {
         if (bgmClip == null || bgmSource == null)
@@ -55,13 +56,11 @@ public class AudioManager : MonoBehaviour
         if (!bgmSource.isPlaying)
         {
             bgmSource.clip = bgmClip;
+            bgmSource.loop = true;
             bgmSource.Play();
         }
     }
 
-    /// <summary>
-    /// 배경음악을 정지한다.
-    /// </summary>
     public void StopBGM()
     {
         if (bgmSource != null && bgmSource.isPlaying)
@@ -70,10 +69,30 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // 개별 효과음 메서드
     public void PlayButtonClick() => PlaySFX(buttonClickClip);
     public void PlayItemGet() => PlaySFX(itemGetClip);
     public void PlaySnakeAttack() => PlaySFX(snakeAttackClip);
     public void PlayEagleCatch() => PlaySFX(eagleCatchClip);
     public void PlayJump() => PlaySFX(jumpClip);
+    public void SetBGMVolume(float volume)
+    {
+        bgmVolume = Mathf.Clamp01(volume);
+        if (bgmSource != null)
+            bgmSource.volume = bgmVolume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        sfxVolume = Mathf.Clamp01(volume);
+    }
+
+    public float GetBGMVolume()
+    {
+        return bgmVolume;
+    }
+
+    public float GetSFXVolume()
+    {
+        return sfxVolume;
+    }
 }

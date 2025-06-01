@@ -39,8 +39,6 @@ public class ItemTooltip : MonoBehaviour
             hasBeenCollected = true;
             tooltipUI?.SetActive(false);
             itemSprite?.SetActive(false);
-
-            gameObject.SetActive(false);
         }
     }
 

@@ -4402,8 +4402,8 @@ MonoBehaviour:
   m_text: "\uB450 \uBC1C\uB85C \uB6F0\uB294 \uB290\uB08C\uC774 \n\uC870\uAE08 \uB2EC\uB77C\uC9C8
     \uAC70\uC57C!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 799740a29cbba6c4db4e20392f76135f, type: 2}
-  m_sharedMaterial: {fileID: 7725106967138573258, guid: 799740a29cbba6c4db4e20392f76135f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
+  m_sharedMaterial: {fileID: 5554503302726756215, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6125,8 +6125,8 @@ MonoBehaviour:
   m_text: "\uB450 \uBC1C\uB85C \uB6F0\uB294 \uB290\uB08C\uC774 \n\uC870\uAE08 \uB2EC\uB77C\uC9C8
     \uAC70\uC57C!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 799740a29cbba6c4db4e20392f76135f, type: 2}
-  m_sharedMaterial: {fileID: 7725106967138573258, guid: 799740a29cbba6c4db4e20392f76135f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
+  m_sharedMaterial: {fileID: 5554503302726756215, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7406,8 +7406,8 @@ Transform:
   m_GameObject: {fileID: 871163496}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3062.6, y: 328.3, z: -2023.3208}
-  m_LocalScale: {x: 22.481342, y: 20.4, z: 22.481342}
+  m_LocalPosition: {x: 3062.6, y: 328.8, z: -2023.3208}
+  m_LocalScale: {x: 31.5, y: 22, z: 22.481342}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 347156013}
@@ -7604,8 +7604,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uCC9C\uCC9C\uD788 \uAC00\uB294 \uAC8C \n\uC88B\uC744 \uD150\uB370\u2026"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fc5fe0f9d59c7d4429b78118a1e6b1ca, type: 2}
-  m_sharedMaterial: {fileID: -9082358472558552108, guid: fc5fe0f9d59c7d4429b78118a1e6b1ca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
+  m_sharedMaterial: {fileID: 5554503302726756215, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8901,8 +8901,8 @@ Transform:
   m_GameObject: {fileID: 1012889219}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3903.6, y: 102.3, z: -2023.3208}
-  m_LocalScale: {x: 27.8, y: 21.5, z: 22.481342}
+  m_LocalPosition: {x: 3903.6, y: 99.5, z: -2023.3208}
+  m_LocalScale: {x: 37.5, y: 23.1, z: 22.481342}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1759884015}
@@ -14517,7 +14517,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3043.4858, y: -49.6, z: -2023.3208}
-  m_LocalScale: {x: 30.07, y: 25.2, z: 22.481342}
+  m_LocalScale: {x: 40.3, y: 28.6, z: 22.481342}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 565399508}
@@ -15791,7 +15791,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1080.3477, y: 130.22458, z: -2023.3208}
-  m_LocalScale: {x: 30.07, y: 25.2, z: 22.481342}
+  m_LocalScale: {x: 40.3, y: 28.6, z: 22.481342}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 334337726}
@@ -16772,8 +16772,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC5B4\uCA50\uC9C0 \uC624\uB298\uC740 \n\uBB34\uAC70\uC6B4 \uB290\uB08C\uC774\uC57C\u2026"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 799740a29cbba6c4db4e20392f76135f, type: 2}
-  m_sharedMaterial: {fileID: 7725106967138573258, guid: 799740a29cbba6c4db4e20392f76135f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
+  m_sharedMaterial: {fileID: 5554503302726756215, guid: 0af767a1dda0de84ab6af226cfdd17cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
