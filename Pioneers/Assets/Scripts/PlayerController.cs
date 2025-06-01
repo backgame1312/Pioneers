@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Settings")]
     public float moveSpeed = 10.0f;
-    public float speedChangeAmount = 200.0f;
+    public float speedChangeAmount = 10.0f;
     private float moveInput;
 
     [Header("Jump Tuning")]
@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Larva"))
         {
-            ReduceSpeedTemporarily(); // Larva 태그와 충돌 시 속도 감소
+            HandleSpeedDown(); // Larva 태그와 충돌 시 속도 감소
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
         }
@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed -= speedChangeAmount;
     }
 
-    private void ReduceSpeedTemporarily()
+    private void HandleSpeedDown()
     {
         moveSpeed -= speedChangeAmount; ; // 속도 절반으로 줄이기
         StartCoroutine(SpeedDownCoroutine());
@@ -332,9 +332,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SpeedDownCoroutine()
     {
-        float originalSpeed = moveSpeed;
         yield return new WaitForSeconds(5f);
-        moveSpeed = originalSpeed;
+        moveSpeed += speedChangeAmount;
     }
 
     private IEnumerator LoadNextSceneWithDelay()

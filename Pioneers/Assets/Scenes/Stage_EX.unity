@@ -19010,6 +19010,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 527339555}
     - target: {fileID: 7712664833320089133, guid: 638c650bc711cd34eae1319a9f7419d0, type: 3}
+      propertyPath: speedChangeAmount
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712664833320089133, guid: 638c650bc711cd34eae1319a9f7419d0, type: 3}
       propertyPath: eggObstacles.Array.size
       value: 2
       objectReference: {fileID: 0}
