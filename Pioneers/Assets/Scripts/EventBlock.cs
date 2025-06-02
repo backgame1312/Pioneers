@@ -36,16 +36,33 @@ public class EventBlock : MonoBehaviour
     {
         if (eventTriggered) return;
 
-        // 플레이어 태그 확인
         if (collision.gameObject.CompareTag("Player"))
         {
-            // 플레이어가 아래에서 위로 충돌했을 때 (점프해서 블럭 밑에서 부딪힌 경우)
-            if (collision.relativeVelocity.y > 0)
+            foreach (ContactPoint2D contact in collision.contacts)
             {
-                TriggerEvent();
+                Vector2 contactPoint = contact.point;
+                Vector2 contactNormal = contact.normal;
+
+                float blockBottomY = GetComponent<Collider2D>().bounds.min.y;
+
+                // 조건 1: 충돌 지점이 블록 밑면에서 일정 거리 이내인지 확인 (0.05f는 허용 오차)
+                bool isUnderBlock = contactPoint.y < blockBottomY + 0.05f;
+
+                // 조건 2: 충돌 방향이 거의 위쪽인지 확인
+                bool isFromBelow = Vector2.Dot(contactNormal, Vector2.up) > 0.9f;
+
+                // 조건 3: 상대 속도가 위쪽
+                bool isMovingUpward = collision.relativeVelocity.y > 0;
+
+                if (isUnderBlock && isFromBelow && isMovingUpward)
+                {
+                    TriggerEvent();
+                    break;
+                }
             }
         }
     }
+
 
     void TriggerEvent()
     {

@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool isDoubleJumpEnabled = false;
     private bool canDoubleJump = false;
     private bool isWeakenedJump = false;
+    private bool isSpeedUpActive = false;
 
     [Header("Items")]
     public List<GameObject> speedUPItems;
@@ -314,14 +315,19 @@ public class PlayerController : MonoBehaviour
 
     private void HandleSpeedUP()
     {
-        moveSpeed += speedChangeAmount;
-        StartCoroutine(SpeedUpCoroutine());
+        if (!isSpeedUpActive)
+        {
+            moveSpeed += speedChangeAmount;
+            StartCoroutine(SpeedUpCoroutine());
+        }
     }
 
     private IEnumerator SpeedUpCoroutine()
     {
+        isSpeedUpActive = true;
         yield return new WaitForSeconds(5f);
         moveSpeed -= speedChangeAmount;
+        isSpeedUpActive = false;
     }
 
     private void HandleSpeedDown()

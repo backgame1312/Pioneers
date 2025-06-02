@@ -548,11 +548,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 19b10b797bdfa3d4eb3f04d55b9add41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 19b10b797bdfa3d4eb3f04d55b9add41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 30.7
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 19b10b797bdfa3d4eb3f04d55b9add41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4020,7 +4020,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4045,7 +4045,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.5, y: 5, z: -10}
+  m_LocalPosition: {x: 18.5, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4064,11 +4064,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2080806083}
-  speed: 5
+  speed: 30
   offset: {x: 7, y: 0}
-  minX: 9.5
-  maxX: 320
-  followThresholdY: 16
+  minX: 18.5
+  maxX: 311
+  followThresholdY: 25
 --- !u!1 &531288213 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9222447543819428740, guid: b80e9c8026b1e86479c1811c48c6a4cd, type: 3}
@@ -8293,10 +8293,10 @@ MonoBehaviour:
   player: {fileID: 2080806078}
   triggerXPosition: 70
   eagleSpeed: 50
-  Xposition: 100
+  Xposition: 130
   Yposition: 15
   targetPosition: {x: 75, y: -3}
-  destroyPosition: {x: 40, y: 20}
+  destroyPosition: {x: 25, y: 20}
 --- !u!60 &1000408890
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11331,9 +11331,9 @@ Transform:
   m_GameObject: {fileID: 1237046497}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 4.6, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 152042798}
   - {fileID: 104670210}
@@ -17055,7 +17055,7 @@ Transform:
   m_GameObject: {fileID: 2121695083}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.249207, y: -15.38224, z: 0}
+  m_LocalPosition: {x: -45, y: -30.8, z: 0}
   m_LocalScale: {x: 0.533776, y: 0.533776, z: 0.533776}
   m_ConstrainProportionsScale: 1
   m_Children: []

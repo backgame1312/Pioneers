@@ -15,6 +15,8 @@ public class EagleAttackController : MonoBehaviour
     public Vector2 targetPosition = new Vector2(100, 1);
     public Vector2 destroyPosition = new Vector2(80, 20.5f);
 
+    private Vector2 initialTargetPosition; // ← 초기 타깃 위치 저장용
+
     private bool isChasing = false;
     private PlayerController playerController;
 
@@ -24,6 +26,8 @@ public class EagleAttackController : MonoBehaviour
     {
         playerController = player.GetComponent<PlayerController>();
         speechBubble = GetComponentInChildren<SpeechBubble>();
+
+        initialTargetPosition = targetPosition; // ← 초기값 저장
     }
 
     void Update()
@@ -68,7 +72,8 @@ public class EagleAttackController : MonoBehaviour
     {
         Debug.Log("Eagle 복원됨");
         isChasing = false;
-        targetPosition = new Vector2(270, -3);
+
+        targetPosition = initialTargetPosition; // ← 원래 값으로 되돌리기
         transform.position = new Vector2(Xposition, Yposition);
         gameObject.SetActive(true);
 
