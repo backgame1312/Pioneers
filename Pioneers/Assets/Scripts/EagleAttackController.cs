@@ -4,7 +4,8 @@ public class EagleAttackController : MonoBehaviour
 {
     [Header("Eagle Settings")]
     public GameObject player;
-    public float triggerXPosition = 100.0f;
+    public float triggerMinXPosition = 100.0f;
+    public float triggerMaxXPosition = 110.0f;
     public float eagleSpeed = 50.0f;
 
     [Header("Initial Position")]
@@ -32,7 +33,8 @@ public class EagleAttackController : MonoBehaviour
 
     void Update()
     {
-        if (!isChasing && player.transform.position.x >= triggerXPosition)
+        if (!isChasing && player.transform.position.x >= triggerMinXPosition &&
+            player.transform.position.x <= triggerMaxXPosition)
         {
             isChasing = true;
             AudioManager.Instance.PlayEagleCatch();

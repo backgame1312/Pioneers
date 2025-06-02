@@ -8291,7 +8291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2080806078}
-  triggerXPosition: 70
+  triggerMinXPosition: 70
+  triggerMaxXPosition: 75
   eagleSpeed: 50
   Xposition: 130
   Yposition: 15

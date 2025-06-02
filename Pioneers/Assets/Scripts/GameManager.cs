@@ -61,25 +61,31 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("RespawnPlayer 코루틴 시작");
 
-        // 2. 대기
         yield return new WaitForSeconds(1.0f);
 
-        // 3. 플레이어 위치 초기화 및 활성화
-        if (playerObject != null && respawnPoint != null)
+        if (playerObject != null)
         {
-            playerObject.transform.position = respawnPoint.position;
+            Vector3 respawnPos = respawnPoint != null ? respawnPoint.position : playerObject.transform.position;
+
+            PlayerController playerController = playerObject.GetComponent<PlayerController>();
+            if (playerController != null && playerController.hasLastNest)
+            {
+                respawnPos = playerController.lastCheckpointPosition;
+            }
+
+            playerObject.transform.position = respawnPos;
             playerObject.SetActive(true);
         }
         else
         {
-            Debug.LogWarning("playerObject 또는 respawnPoint가 null입니다.");
+            Debug.LogWarning("playerObject가 null입니다.");
         }
 
-        // 4. 플레이어 활성화 후 복원 작업 수행
-        yield return new WaitForEndOfFrame(); // 1프레임 대기하여 SetActive 반영
+        yield return new WaitForEndOfFrame();
+
         if (playerController != null)
         {
-            playerController.RestoreAllObstacles(); // 복원 호출
+            playerController.RestoreAllObstacles();
         }
 
         FindAnyObjectByType<DisappearingPlatformManager>()?.RestoreObstacle();

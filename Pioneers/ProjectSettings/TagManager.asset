@@ -14,6 +14,8 @@ TagManager:
   - FxTemporaire
   - Egg
   - Egg_Obstacle
+  - TurnPoint
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

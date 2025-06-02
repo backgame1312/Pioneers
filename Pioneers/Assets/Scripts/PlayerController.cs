@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 4.0f;
     public float weakenedJumpPower = 0.5f;
 
+    [Header("Spawn Point")]
+    public Vector3 lastCheckpointPosition { get; private set; }
+    public bool hasLastNest = false;
+
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private bool isDoubleJumpEnabled = false;
@@ -260,7 +264,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("TurnPoint"))
         {
             isGrounded = true;
             canDoubleJump = true;
@@ -310,6 +314,13 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Egg_Obstacle"))
         {
             other.gameObject.SetActive(false);
+        }
+
+        if (other.CompareTag("Checkpoint"))
+        {
+            lastCheckpointPosition = other.transform.position;
+            hasLastNest = true;
+            Debug.Log("Checkpoint 위치 저장됨: " + lastCheckpointPosition);
         }
     }
 

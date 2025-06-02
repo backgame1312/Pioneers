@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\FallingAttack.cs" />
     <Compile Include="Assets\Scripts\SpeechBubble.cs" />
     <Compile Include="Assets\Scripts\EventBlock.cs" />
+    <Compile Include="Assets\Scripts\RaccoonAttackController.cs" />
     <Compile Include="Assets\Scripts\MoleAttackController.cs" />
     <Compile Include="Assets\Scripts\SpikeBlockActivator.cs" />
     <Compile Include="Assets\Scripts\DeathTrigger.cs" />
