@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ClearBlock : MonoBehaviour
 {
-    public float clearDelay = 1f; // 블럭이 사라지는 지연 시간
+    public float clearDelay = 1f;
     private bool isClear = false;
 
     public GameObject balloonHint;
@@ -23,6 +23,12 @@ public class ClearBlock : MonoBehaviour
 
     private void OnEnable()
     {
+        if (isClear)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (balloonHint != null)
         {
             balloonHint.SetActive(false);
@@ -42,7 +48,7 @@ public class ClearBlock : MonoBehaviour
         if (collision.collider.CompareTag("Player") && !isClear)
         {
             isClear = true;
-            Invoke("Disappear", clearDelay); // 일정 시간 뒤에 사라지게 예약
+            Invoke(nameof(Disappear), clearDelay); // 1초 후 사라지기
         }
     }
 

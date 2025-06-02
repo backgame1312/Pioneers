@@ -33,12 +33,18 @@ public class CharacterFaceManager : MonoBehaviour
     {
         HideAll();
         debuffImage.SetActive(true);
+
+        StopAllCoroutines();
+        StartCoroutine(ReturnToBasicAfterDelay(2f));
     }
 
     public void ShowBuff()
     {
         HideAll();
         buffImage.SetActive(true);
+
+        StopAllCoroutines();
+        StartCoroutine(ReturnToBasicAfterDelay(2f));
     }
 
     public void ShowFall()
@@ -46,8 +52,8 @@ public class CharacterFaceManager : MonoBehaviour
         HideAll();
         dieImage.SetActive(true);
 
-        StopAllCoroutines();
-        StartCoroutine(ReturnToBasicAfterDelay(2f));
+        StopAllCoroutines(); 
+        StartCoroutine(ReturnToBasicAfterDelay(2f)); 
     }
 
     public void ShowClear()

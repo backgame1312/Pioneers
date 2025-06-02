@@ -22,11 +22,13 @@ public class UIManager : MonoBehaviour
     private float elapsed = 0.0f;
 
     public GameObject tutorialUI;
-    public Button buttonA, buttonD, buttonE, buttonSpace;
+    public Button buttonA, buttonD, buttonSpace;
     private bool isFirstDeath = false;
 
     Color normal = new Color(1, 1, 1, 0.5f); // 반투명
     Color pressed = new Color(1, 1, 1, 1f);  // 불투명
+
+    private bool isTutorialStage = false;
 
     void Awake()
     {
@@ -41,10 +43,16 @@ public class UIManager : MonoBehaviour
 
         deathAndElapseTimeGameObject.SetActive(true);
 
-        if (!isFirstDeath)
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        isTutorialStage = currentSceneName == "Tutorial";
+
+        if (SceneManager.GetActiveScene().name == "Tutorial" && !isFirstDeath)
         {
-            tutorialUI.SetActive(true);
-            StartCoroutine(HideTutorialAfterDelay(5f));
+            if (tutorialUI != null)
+            {
+                tutorialUI.SetActive(true);
+                StartCoroutine(HideTutorialAfterDelay(5f));
+            }
         }
 
         AudioManager.Instance.PlayBGM();
@@ -53,7 +61,8 @@ public class UIManager : MonoBehaviour
     IEnumerator HideTutorialAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        tutorialUI.SetActive(false);
+        if (tutorialUI != null)
+            tutorialUI.SetActive(false);
     }
 
     void Update()
@@ -65,10 +74,12 @@ public class UIManager : MonoBehaviour
             TogglePauseMenu();
         }
 
-        UpdateButton(buttonA, KeyCode.A);
-        UpdateButton(buttonD, KeyCode.D);
-        UpdateButton(buttonE, KeyCode.E);
-        UpdateButton(buttonSpace, KeyCode.Space);
+        if (isTutorialStage)
+        {
+            UpdateButton(buttonA, KeyCode.A);
+            UpdateButton(buttonD, KeyCode.D);
+            UpdateButton(buttonSpace, KeyCode.Space);
+        }
     }
 
     private void UpdateElapsedTime()
@@ -119,6 +130,8 @@ public class UIManager : MonoBehaviour
 
     void UpdateButton(Button btn, KeyCode key)
     {
+        if (btn == null) return;
+
         var colors = btn.colors;
         colors.normalColor = Input.GetKey(key) ? pressed : normal;
         btn.colors = colors;
@@ -128,7 +141,8 @@ public class UIManager : MonoBehaviour
     {
         if (!isFirstDeath)
         {
-            tutorialUI.SetActive(false);
+            if (tutorialUI != null)
+                tutorialUI.SetActive(false);
             isFirstDeath = true;
         }
     }

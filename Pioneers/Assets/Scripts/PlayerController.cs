@@ -278,6 +278,9 @@ public class PlayerController : MonoBehaviour
             HandleSpeedUP();
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
+
+            if (faceManager != null)
+                faceManager.ShowBuff();
         }
 
         if (other.CompareTag("Goal"))
@@ -290,6 +293,9 @@ public class PlayerController : MonoBehaviour
             isDoubleJumpEnabled = true;
             other.gameObject.SetActive(false); // Peanut 오브젝트 비활성화
             AudioManager.Instance.PlayItemGet();
+
+            if (faceManager != null)
+                faceManager.ShowBuff();
         }
 
         if (other.CompareTag("Larva"))
@@ -297,6 +303,9 @@ public class PlayerController : MonoBehaviour
             HandleSpeedDown(); // Larva 태그와 충돌 시 속도 감소
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
+
+            if (faceManager != null)
+                faceManager.ShowDebuff();
         }
 
         if (other.CompareTag("Mushroom"))
@@ -304,6 +313,9 @@ public class PlayerController : MonoBehaviour
             isWeakenedJump = true;
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
+
+            if (faceManager != null)
+                faceManager.ShowDebuff();
         }
 
         if (other.CompareTag("Egg"))

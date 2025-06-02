@@ -11,6 +11,7 @@ public class SnakeController : MonoBehaviour
     public float snakeDownSpeed = 5.0f;
     public float targetYPosition = 5.0f;
     public float resetTime = 5.0f;
+    public GameObject speechBubble;
 
     private PlayerController playerController;
     private Vector3 initialPosition;
@@ -29,6 +30,8 @@ public class SnakeController : MonoBehaviour
         {
             isRising = true;
             AudioManager.Instance.PlaySnakeAttack();
+
+            if (speechBubble != null) speechBubble.SetActive(false);
 
         }
 
@@ -59,6 +62,9 @@ public class SnakeController : MonoBehaviour
             yield return null;
         }
 
+        if (speechBubble != null)
+            speechBubble.SetActive(true);
+
         gameObject.SetActive(false);
         Invoke("RestoreObstacle", 3f);
     }
@@ -72,6 +78,9 @@ public class SnakeController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerController.Die();
+
+            if (speechBubble != null)
+                speechBubble.SetActive(true);
         }
     }
 }
