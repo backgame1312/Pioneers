@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 10.0f;
     public float speedChangeAmount = 10.0f;
     private float moveInput;
+    private float defaultMoveSpeed;
+    public float normalGravity = 8f;
 
     [Header("Jump Tuning")]
     public float jumpForce = 5.0f;
     public float defaultjump = 2f;
     public float jumpSpeed = 4.0f;
     public float weakenedJumpPower = 0.5f;
+    private float defaultJumpForce;
 
     [Header("Spawn Point")]
     public Vector3 lastCheckpointPosition { get; private set; }
@@ -38,40 +41,22 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> weakenedJumpItems;
     public List<GameObject> eggObstacles;
 
-    private DisappearingPlatformManager disappearingPlatformManager;
-    private AppearingPlatformManager appearingPlatformManager;
-    private FallingAttackManager fallingAttackManager;
-    private JumpObstacleManager jumpObstacleManager;
-    private FallingPlatform[] fallingPlatforms;
-    private SpikeBlockActivator[] spikeBlockActivators;
-    private RisingPlatform[] risingPlatforms;
-    private EagleAttackController[] eagleAttackControllers;
-    private MoleAttackController[] moleAttackControllers;
-
     private Animator animator;
-
     public CharacterFaceManager faceManager;
+
+    [Header("Gimmick Manager")]
+    public ObstacleRestoreManager obstacleRestoreManager;  // 추가
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        disappearingPlatformManager = FindAnyObjectByType<DisappearingPlatformManager>();
-        appearingPlatformManager = FindAnyObjectByType<AppearingPlatformManager>();
-        fallingAttackManager = FindAnyObjectByType<FallingAttackManager>();
-        jumpObstacleManager = FindAnyObjectByType<JumpObstacleManager>();
-        fallingPlatforms = FindObjectsByType<FallingPlatform>(FindObjectsSortMode.None);
-        spikeBlockActivators = FindObjectsByType<SpikeBlockActivator>(FindObjectsSortMode.None);
-        risingPlatforms = FindObjectsByType<RisingPlatform>(FindObjectsSortMode.None);
-        eagleAttackControllers = FindObjectsByType<EagleAttackController>(FindObjectsSortMode.None);
-        moleAttackControllers = FindObjectsByType<MoleAttackController>(FindObjectsSortMode.None);
-
         animator = GetComponent<Animator>();
 
+        defaultMoveSpeed = moveSpeed;
+        defaultJumpForce = jumpForce;
+
         if (faceManager != null)
-        {
             faceManager.ShowBasic();
-        }
     }
 
     void Update()
@@ -98,20 +83,12 @@ public class PlayerController : MonoBehaviour
 
     private void MovementController()
     {
-        float moveInput = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
             {
-                float jumpPower = jumpForce;
-                
-                if (isWeakenedJump)
-                {
-                    jumpPower *= weakenedJumpPower;
-                    isWeakenedJump = false;
-                }
+                float jumpPower = isWeakenedJump ? jumpForce * weakenedJumpPower : jumpForce;
+                isWeakenedJump = false;
 
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
                 isGrounded = false;
@@ -128,14 +105,7 @@ public class PlayerController : MonoBehaviour
 
     private void JumpGravity()
     {
-        if (rb.linearVelocity.y < 0)
-        {
-            rb.gravityScale = jumpSpeed;
-        }
-        else
-        {
-            rb.gravityScale = defaultjump;
-        }
+        rb.gravityScale = rb.linearVelocity.y < 0 ? jumpSpeed : defaultjump;
     }
 
     private void CheckFallDeath()
@@ -151,14 +121,10 @@ public class PlayerController : MonoBehaviour
         deathCount++;
         Debug.Log("플레이어가 죽었습니다. 죽은 횟수: " + deathCount);
 
-        if (UIManager.Instance != null) // UIManager가 null이 아닐 때만 호출
+        if (UIManager.Instance != null)
         {
             UIManager.Instance.UpdateDeathCount(deathCount);
             UIManager.Instance.OnPlayerDeath();
-        }
-        else
-        {
-            Debug.LogWarning("UIManager가 초기화되지 않았습니다.");
         }
 
         if (GameManager.Instance != null)
@@ -170,86 +136,14 @@ public class PlayerController : MonoBehaviour
         {
             faceManager.ShowFall();
         }
-    }
 
-    public void RestoreAllObstacles()
-    {
-        if (fallingAttackManager != null)
-        {
-            fallingAttackManager.RestoreObstacles();
-        }
+        ResetToDefaultStats(); // 스탯 초기화
 
-        if (disappearingPlatformManager != null)
-        {
-            disappearingPlatformManager.RestoreObstacle();
-        }
-
-        if (appearingPlatformManager != null)
-        {
-            appearingPlatformManager.RestoreObstacle();
-        }
-
-        if (jumpObstacleManager != null)
-        {
-            jumpObstacleManager.RestoreObstacle();
-        }
-
-        if (fallingPlatforms != null)
-        {
-            foreach (var platform in fallingPlatforms)
-            {
-                if (platform != null)
-                    platform.RestoreObstacle();
-            }
-        }
-
-        if (spikeBlockActivators != null)
-        {
-            foreach (var spikePlatform in spikeBlockActivators)
-            {
-                if (spikePlatform != null)
-                    spikePlatform.RestoreObstacle();
-            }
-        }
-
-        if (risingPlatforms != null)
-        {
-            foreach (var risingPlatform in risingPlatforms)
-            {
-                if (risingPlatform != null)
-                    risingPlatform.RestoreObstacle();
-            }
-        }
-
-        if (eagleAttackControllers != null)
-        {
-            foreach (var eagle in eagleAttackControllers)
-            {
-                if (eagle != null)
-                    eagle.RestoreObstacle();
-            }
-        }
-
-        if (moleAttackControllers != null)
-        {
-            foreach (var mole in moleAttackControllers)
-            {
-                if (mole != null)
-                    mole.RestoreObstacle();
-            }
-        }
-
-        // 아이템들도 포함
         RestoreItemList(speedUPItems);
         RestoreItemList(speedDownItems);
         RestoreItemList(weakenedJumpItems);
         RestoreItemList(doubleJumpItems);
         RestoreItemList(eggObstacles);
-
-        isDoubleJumpEnabled = false;
-        canDoubleJump = false;
-
-        Debug.Log("플레이어 장애물 복원 완료");
     }
     private void RestoreItemList(List<GameObject> itemList)
     {
@@ -260,6 +154,17 @@ public class PlayerController : MonoBehaviour
             if (item != null)
                 item.SetActive(true);
         }
+    }
+
+    private void ResetToDefaultStats()
+    {
+        moveSpeed = defaultMoveSpeed;
+        jumpForce = defaultJumpForce;
+        isWeakenedJump = false;
+        isSpeedUpActive = false;
+        isDoubleJumpEnabled = false;
+        canDoubleJump = false;
+        Debug.Log("스탯 초기화 완료");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -278,34 +183,23 @@ public class PlayerController : MonoBehaviour
             HandleSpeedUP();
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
-
-            if (faceManager != null)
-                faceManager.ShowBuff();
-        }
-
-        if (other.CompareTag("Goal"))
-        {
-            StartCoroutine(LoadNextSceneWithDelay());
+            faceManager?.ShowBuff();
         }
 
         if (other.CompareTag("Peanut"))
         {
             isDoubleJumpEnabled = true;
-            other.gameObject.SetActive(false); // Peanut 오브젝트 비활성화
+            other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
-
-            if (faceManager != null)
-                faceManager.ShowBuff();
+            faceManager?.ShowBuff();
         }
 
         if (other.CompareTag("Larva"))
         {
-            HandleSpeedDown(); // Larva 태그와 충돌 시 속도 감소
+            HandleSpeedDown();
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
-
-            if (faceManager != null)
-                faceManager.ShowDebuff();
+            faceManager?.ShowDebuff();
         }
 
         if (other.CompareTag("Mushroom"))
@@ -313,26 +207,21 @@ public class PlayerController : MonoBehaviour
             isWeakenedJump = true;
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
-
-            if (faceManager != null)
-                faceManager.ShowDebuff();
+            faceManager?.ShowDebuff();
         }
 
-        if (other.CompareTag("Egg"))
-        {
-            Destroy(other.gameObject);  // 태그가 Egg인 오브젝트 파괴
-        }
-
-        if (other.CompareTag("Egg_Obstacle"))
-        {
-            other.gameObject.SetActive(false);
-        }
+        if (other.CompareTag("Egg")) Destroy(other.gameObject);
+        if (other.CompareTag("Egg_Obstacle")) other.gameObject.SetActive(false);
 
         if (other.CompareTag("Checkpoint"))
         {
             lastCheckpointPosition = other.transform.position;
             hasLastNest = true;
-            Debug.Log("Checkpoint 위치 저장됨: " + lastCheckpointPosition);
+        }
+
+        if (other.CompareTag("Goal"))
+        {
+            StartCoroutine(LoadNextSceneWithDelay());
         }
     }
 
@@ -349,25 +238,25 @@ public class PlayerController : MonoBehaviour
     {
         isSpeedUpActive = true;
         yield return new WaitForSeconds(5f);
-        moveSpeed -= speedChangeAmount;
+        moveSpeed = defaultMoveSpeed;
         isSpeedUpActive = false;
     }
 
     private void HandleSpeedDown()
     {
-        moveSpeed -= speedChangeAmount; ; // 속도 절반으로 줄이기
+        moveSpeed -= speedChangeAmount;
         StartCoroutine(SpeedDownCoroutine());
     }
 
     private IEnumerator SpeedDownCoroutine()
     {
         yield return new WaitForSeconds(5f);
-        moveSpeed += speedChangeAmount;
+        moveSpeed = defaultMoveSpeed;
     }
 
     private IEnumerator LoadNextSceneWithDelay()
     {
-        yield return new WaitForSeconds(3f); // 3초 기다리고
-        SceneManager.LoadScene("Game");        // 3초 후에 씬 이동
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Game");
     }
 }

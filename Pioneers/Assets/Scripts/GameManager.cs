@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     private PlayerController playerController;
+    private ObstacleRestoreManager obstacleRestoreManager;
 
     [Header("Settings")]
     public GameObject playerObject;
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("playerObject가 설정되지 않았습니다.");
         }
+
+        obstacleRestoreManager = FindAnyObjectByType<ObstacleRestoreManager>();
+        if (obstacleRestoreManager == null)
+            Debug.LogWarning("ObstacleRestoreManager가 씬에 없습니다!");
     }
 
     public void HandlePlayerDeath(Vector3 deathPosition)
@@ -85,7 +90,7 @@ public class GameManager : MonoBehaviour
 
         if (playerController != null)
         {
-            playerController.RestoreAllObstacles();
+            obstacleRestoreManager?.RestoreAllObstacles();
         }
 
         FindAnyObjectByType<DisappearingPlatformManager>()?.RestoreObstacle();

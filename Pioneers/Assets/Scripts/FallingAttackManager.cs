@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class FallingAttackManager : MonoBehaviour
 {
-    private FallingAttack[] fallingObjects;
+    public FallingAttack[] fallingObjects;
     public Transform player;
 
-    void Awake()
+    void Start()
     {
         fallingObjects = GameObject.FindObjectsByType<FallingAttack>(FindObjectsSortMode.None);
     }
