@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     public GameObject deathAndElapseTimeGameObject;
     public TextMeshProUGUI death;
     public TextMeshProUGUI elapseTime;
+    public float ElapsedTime => elapsed;
+    public int DeathCount => deathCount;
 
     public GameObject pauseUI;
     public GameObject resumeButton;
@@ -22,13 +24,18 @@ public class UIManager : MonoBehaviour
     private float elapsed = 0.0f;
 
     public GameObject tutorialUI;
-    public Button buttonA, buttonD, buttonSpace;
+    public Button buttonA, buttonD, buttonE, buttonSpace;
     private bool isFirstDeath = false;
 
     Color normal = new Color(1, 1, 1, 0.5f); // 반투명
     Color pressed = new Color(1, 1, 1, 1f);  // 불투명
 
     private bool isTutorialStage = false;
+
+    [SerializeField] private GameObject resultPanel;
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI deathText;
+    [SerializeField] private TextMeshProUGUI eggText;
 
     void Awake()
     {
@@ -51,11 +58,11 @@ public class UIManager : MonoBehaviour
             if (tutorialUI != null)
             {
                 tutorialUI.SetActive(true);
-                StartCoroutine(HideTutorialAfterDelay(5f));
+                StartCoroutine(HideTutorialAfterDelay(4f));
             }
         }
 
-        AudioManager.Instance.PlayBGM();
+        AudioManager.Instance.PlayGameBGM();
     }
 
     IEnumerator HideTutorialAfterDelay(float delay)
@@ -78,6 +85,7 @@ public class UIManager : MonoBehaviour
         {
             UpdateButton(buttonA, KeyCode.A);
             UpdateButton(buttonD, KeyCode.D);
+            UpdateButton(buttonE, KeyCode.E);
             UpdateButton(buttonSpace, KeyCode.Space);
         }
     }
@@ -109,7 +117,7 @@ public class UIManager : MonoBehaviour
         if (isPaused)
             AudioManager.Instance.StopBGM();
         else
-            AudioManager.Instance.PlayBGM();
+            AudioManager.Instance.PlayGameBGM();
     }
 
     public void ResumeGame()
@@ -125,7 +133,7 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
 
         AudioManager.Instance.PlayButtonClick();
-        AudioManager.Instance.PlayBGM();
+        AudioManager.Instance.PlayGameBGM();
     }
 
     void UpdateButton(Button btn, KeyCode key)
@@ -145,5 +153,21 @@ public class UIManager : MonoBehaviour
                 tutorialUI.SetActive(false);
             isFirstDeath = true;
         }
+    }
+
+    public void ShowResult(float time, int deaths, int eggs)
+    {
+        resultPanel.SetActive(true);
+
+        timeText.text = $"Time: {FormatTime(time)}";
+        deathText.text = $"Deaths: {deaths}";
+        eggText.text = $"Eggs: {eggs}";
+    }
+
+    private string FormatTime(float t)
+    {
+        int min = Mathf.FloorToInt(t / 60);
+        int sec = Mathf.FloorToInt(t % 60);
+        return $"{min:00}:{sec:00}";
     }
 }

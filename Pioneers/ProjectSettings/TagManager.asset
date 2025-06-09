@@ -18,6 +18,7 @@ TagManager:
   - Checkpoint
   - Spike
   - WallPart
+  - MainGoal
   layers:
   - Default
   - TransparentFX

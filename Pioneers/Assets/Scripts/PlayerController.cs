@@ -39,7 +39,10 @@ public class PlayerController : MonoBehaviour
     public CharacterFaceManager faceManager;
 
     [Header("Gimmick Manager")]
-    public ObstacleRestoreManager obstacleRestoreManager;  // 추가
+    public ObstacleRestoreManager obstacleRestoreManager;
+
+    private int eggCount = 0;
+    public int EggCount => eggCount;
 
     void Start()
     {
@@ -121,6 +124,7 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance?.UpdateDeathCount(deathCount);
         UIManager.Instance?.OnPlayerDeath();
         GameManager.Instance?.HandlePlayerDeath(transform.position);
+        AudioManager.Instance.PlayDeath();
         faceManager?.ShowFall();
 
         ResetToDefaultStats();
@@ -185,7 +189,14 @@ public class PlayerController : MonoBehaviour
             faceManager?.ShowDebuff();
         }
 
-        if (other.CompareTag("Egg")) Destroy(other.gameObject);
+        if (other.CompareTag("Egg"))
+        {
+            AudioManager.Instance.PlayEggGet();
+            eggCount++;
+            faceManager?.ShowBuff();
+            Destroy(other.gameObject);
+        }
+
         if (other.CompareTag("Egg_Obstacle")) other.gameObject.SetActive(false);
 
         if (other.CompareTag("Checkpoint"))
@@ -197,6 +208,16 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Goal"))
         {
             StartCoroutine(LoadNextSceneWithDelay());
+        }
+
+        if (other.CompareTag("MainGoal"))
+        {
+            Time.timeScale = 0f;
+            float time = UIManager.Instance.ElapsedTime;
+            int deaths = UIManager.Instance.DeathCount;
+            int eggs = eggCount;
+
+            UIManager.Instance.ShowResult(time, deaths, eggs);
         }
     }
 

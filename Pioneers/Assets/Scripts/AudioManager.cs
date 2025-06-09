@@ -9,10 +9,14 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioClip buttonClickClip;
     [SerializeField] private AudioClip itemGetClip;
+    [SerializeField] private AudioClip eggGetClip;
     [SerializeField] private AudioClip snakeAttackClip;
     [SerializeField] private AudioClip eagleCatchClip;
     [SerializeField] private AudioClip jumpClip;
+    [SerializeField] private AudioClip mainMenuBgmClip;
     [SerializeField] private AudioClip bgmClip;
+    [SerializeField] private AudioClip deathClip;
+
 
     private float bgmVolume = 1f;
     private float sfxVolume = 1f;
@@ -45,21 +49,39 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip, sfxVolume);
     }
 
-    public void PlayBGM()
+    // 추가된 메서드들
+    public void PlayMainMenuBGM()
     {
-        if (bgmClip == null || bgmSource == null)
+        if (mainMenuBgmClip == null || bgmSource == null)
         {
-            Debug.LogWarning("BGM 재생 실패: bgmClip 또는 bgmSource가 null입니다.");
+            Debug.LogWarning("MainMenu BGM 재생 실패: mainMenuBgmClip 또는 bgmSource가 null입니다.");
             return;
         }
 
-        if (!bgmSource.isPlaying)
+        if (bgmSource.clip != mainMenuBgmClip)
+        {
+            bgmSource.clip = mainMenuBgmClip;
+            bgmSource.loop = true;
+            bgmSource.Play();
+        }
+    }
+
+    public void PlayGameBGM()
+    {
+        if (bgmClip == null || bgmSource == null)
+        {
+            Debug.LogWarning("Game BGM 재생 실패: bgmClip 또는 bgmSource가 null입니다.");
+            return;
+        }
+
+        if (bgmSource.clip != bgmClip)
         {
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;
             bgmSource.Play();
         }
     }
+
 
     public void StopBGM()
     {
@@ -71,9 +93,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlayButtonClick() => PlaySFX(buttonClickClip);
     public void PlayItemGet() => PlaySFX(itemGetClip);
+    public void PlayEggGet() => sfxSource.PlayOneShot(eggGetClip, sfxVolume * 0.6f);
     public void PlaySnakeAttack() => PlaySFX(snakeAttackClip);
     public void PlayEagleCatch() => PlaySFX(eagleCatchClip);
     public void PlayJump() => PlaySFX(jumpClip);
+    public void PlayDeath() => sfxSource.PlayOneShot(deathClip, sfxVolume * 0.4f);
+
     public void SetBGMVolume(float volume)
     {
         bgmVolume = Mathf.Clamp01(volume);

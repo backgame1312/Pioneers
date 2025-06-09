@@ -27,7 +27,7 @@ public class MainMenuUI : MonoBehaviour
         // 시작 시 설정창 꺼두기
         settingsPanel.SetActive(false);
 
-        AudioManager.Instance.PlayBGM();
+        AudioManager.Instance.PlayMainMenuBGM();
     }
 
     void Update()
@@ -49,14 +49,14 @@ public class MainMenuUI : MonoBehaviour
     public void OnStartButtonClicked()
     {
         AudioManager.Instance.PlayButtonClick();
-        SceneManager.LoadScene("Stage_EX");
+        FadeManager.Instance.FadeToScene("Story");
         AudioManager.Instance.StopBGM();
     }
 
     public void OnTutorialButtonClicked()
     {
         AudioManager.Instance.PlayButtonClick();
-        SceneManager.LoadScene("Tutorial");
+        FadeManager.Instance.FadeToScene("Tutorial"); 
         AudioManager.Instance.StopBGM();
     }
 
