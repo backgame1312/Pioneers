@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour
     private bool isSpeedUpActive = false;
     private bool isDead = false;
 
+    [Header("Mystery Jump")]
+    private bool isMysteryJumpActive = false;
+    private bool hasUsedMysteryJump = false;
+
     private Animator animator;
     public CharacterFaceManager faceManager;
 
@@ -89,6 +93,13 @@ public class PlayerController : MonoBehaviour
 
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
                 isGrounded = false;
+
+                if (isMysteryJumpActive && !hasUsedMysteryJump)
+                {
+                    rb.gravityScale = 0f; // 중력 제거
+                    hasUsedMysteryJump = true;
+                }
+
                 AudioManager.Instance.PlayJump();
             }
             else if (isDoubleJumpEnabled && canDoubleJump)
@@ -102,7 +113,17 @@ public class PlayerController : MonoBehaviour
 
     private void JumpGravity()
     {
-        rb.gravityScale = rb.linearVelocity.y < 0 ? jumpSpeed : defaultjump;
+        if (!hasUsedMysteryJump)
+        {
+            rb.gravityScale = rb.linearVelocity.y < 0 ? jumpSpeed : defaultjump;
+        }
+        else
+        {
+            if (rb.linearVelocity.y <= 0)
+            {
+                rb.gravityScale = jumpSpeed;
+            }
+        }
     }
 
     private void CheckFallDeath()
@@ -143,6 +164,8 @@ public class PlayerController : MonoBehaviour
         isSpeedUpActive = false;
         isDoubleJumpEnabled = false;
         canDoubleJump = false;
+        isMysteryJumpActive = false;
+        hasUsedMysteryJump = false;
         Debug.Log("스탯 초기화 완료");
     }
 
@@ -187,6 +210,15 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             AudioManager.Instance.PlayItemGet();
             faceManager?.ShowDebuff();
+        }
+
+        if (other.CompareTag("Mystery"))
+        {
+            isMysteryJumpActive = true;
+            hasUsedMysteryJump = false;
+            other.gameObject.SetActive(false);
+            AudioManager.Instance.PlayItemGet();
+            faceManager?.ShowBuff();
         }
 
         if (other.CompareTag("Egg"))

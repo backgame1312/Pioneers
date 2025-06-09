@@ -28,6 +28,7 @@ public class ObstacleRestoreManager : MonoBehaviour
     public List<GameObject> speedDownItems;
     public List<GameObject> weakenedJumpItems;
     public List<GameObject> eggObstacles;
+    public List<GameObject> mysteryEggs; 
 
     void Start()
     {
@@ -87,12 +88,13 @@ public class ObstacleRestoreManager : MonoBehaviour
         foreach (var wall in closingWallControllers)
             wall?.RestoreObstacle();
 
-        // 아이템 복원 (SetActive(true))
+        // 아이템 복원
         RestoreGameObjectList(speedUPItems);
         RestoreGameObjectList(doubleJumpItems);
         RestoreGameObjectList(speedDownItems);
         RestoreGameObjectList(weakenedJumpItems);
         RestoreGameObjectList(eggObstacles);
+        RestoreGameObjectList(mysteryEggs); 
     }
 
     private void RestoreGameObjectList(List<GameObject> itemList)

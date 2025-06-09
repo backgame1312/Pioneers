@@ -16,6 +16,7 @@ public class SnakeController : MonoBehaviour
     private PlayerController playerController;
     private Vector3 initialPosition;
     private bool isRising = false;
+    private bool hasActivated = false; // 중복 방지용 변수
 
     void Start()
     {
@@ -25,14 +26,16 @@ public class SnakeController : MonoBehaviour
 
     void Update()
     {
-        // 플레이어가 지정된 X좌표를 넘어가면 올라가기 시작
-        if (!isRising && player.transform.position.x >= triggerXPosition && player.transform.position.x <= triggerMaximumXPosition)
+        // 플레이어가 지정된 X좌표를 넘어가면 올라가기 시작 (한 번만 작동)
+        if (!isRising && !hasActivated && player.transform.position.x >= triggerXPosition && player.transform.position.x <= triggerMaximumXPosition)
         {
             isRising = true;
+            hasActivated = true;
+
             AudioManager.Instance.PlaySnakeAttack();
 
-            if (speechBubble != null) speechBubble.SetActive(false);
-
+            if (speechBubble != null)
+                speechBubble.SetActive(false);
         }
 
         // 올라가는 동작
@@ -44,16 +47,16 @@ public class SnakeController : MonoBehaviour
         // 목표 Y에 도달하면 내려가기 시작
         if (transform.position.y >= targetYPosition && isRising)
         {
-            isRising = false; // 올라가는 동작이 끝났으므로 isRising을 false로 설정
-            StartCoroutine(DescendAfterDelay(3f)); // 3초 후 내려가기 시작
+            isRising = false;
+            StartCoroutine(DescendAfterDelay(3f));
         }
     }
 
     private IEnumerator DescendAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay); // 3초 대기
+        yield return new WaitForSeconds(delay);
 
-        float descentSpeed = snakeDownSpeed * Time.deltaTime; // 속도와 deltaTime을 결합하여 일정하게 유지
+        float descentSpeed = snakeDownSpeed * Time.deltaTime;
 
         // 내려가는 동작
         while (transform.position.y > initialPosition.y)
@@ -68,12 +71,14 @@ public class SnakeController : MonoBehaviour
         gameObject.SetActive(false);
         Invoke("RestoreObstacle", 3f);
     }
+
     private void RestoreObstacle()
     {
         gameObject.SetActive(true);
+        hasActivated = false; // 리셋 시 다시 발동 가능하게
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {

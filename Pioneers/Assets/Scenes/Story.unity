@@ -383,7 +383,7 @@ MonoBehaviour:
   - {fileID: 8666664153384852542, guid: 5582ff3ed1fbb5a439fb5140a689780d, type: 3}
   - {fileID: -118444934011705414, guid: d8aca34e81cd0c743a2697fa239e9cdc, type: 3}
   fadeDuration: 0.5
-  displayDuration: 2
+  displayDuration: 4
 --- !u!4 &714131796
 Transform:
   m_ObjectHideFlags: 0

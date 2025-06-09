@@ -10,29 +10,32 @@ public class SnakeDropController : MonoBehaviour
     public float triggerMaximumXPosition = 10.0f;
     public float snakeFallSpeed = 20.0f;
     public float snakeRiseSpeed = 5.0f;
-    public float targetYPosition = 2.0f; // 뱀이 내려올 y위치
+    public float targetYPosition = 2.0f;
     public float resetTime = 5.0f;
     public GameObject speechBubble;
 
     private PlayerController playerController;
     private Vector3 initialPosition;
     private bool isFalling = false;
+    private bool hasActivated = false; // 중복 방지용
 
     void Start()
     {
         playerController = player.GetComponent<PlayerController>();
-        initialPosition = transform.position;  // 시작 위치 (위에 있음)
+        initialPosition = transform.position;
     }
 
     void Update()
     {
-        // 플레이어가 특정 X 구간에 들어오면 떨어지기 시작
-        if (!isFalling &&
+        // 트리거 조건 + hasActivated로 중복 작동 방지
+        if (!isFalling && !hasActivated &&
             player.transform.position.x >= triggerXPosition &&
             player.transform.position.x <= triggerMaximumXPosition &&
             player.transform.position.y >= triggerYPosition)
         {
             isFalling = true;
+            hasActivated = true;
+
             AudioManager.Instance.PlaySnakeAttack();
 
             if (speechBubble != null) speechBubble.SetActive(false);
@@ -44,11 +47,11 @@ public class SnakeDropController : MonoBehaviour
             transform.position += Vector3.down * snakeFallSpeed * Time.deltaTime;
         }
 
-        // 목표 지점에 도달하면 올라가기 시작
+        // 도달하면 올라가기
         if (transform.position.y <= targetYPosition && isFalling)
         {
             isFalling = false;
-            StartCoroutine(RiseAfterDelay(3f)); // 3초 대기 후 올라가기
+            StartCoroutine(RiseAfterDelay(3f));
         }
     }
 
@@ -74,6 +77,7 @@ public class SnakeDropController : MonoBehaviour
     private void RestoreObstacle()
     {
         gameObject.SetActive(true);
+        hasActivated = false; // 다시 발동 가능하도록 초기화
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
