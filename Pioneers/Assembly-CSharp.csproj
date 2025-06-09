@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\MoleAttackController.cs" />
     <Compile Include="Assets\Scripts\SpikeBlockActivator.cs" />
     <Compile Include="Assets\Scripts\DeathTrigger.cs" />
+    <Compile Include="Assets\Scripts\SequentialPlatformManager.cs" />
     <Compile Include="Assets\Scripts\DisappearingPlatform.cs" />
     <Compile Include="Assets\Scripts\ParticleManager.cs" />
     <Compile Include="Assets\Scripts\DisappearingPlatformManager.cs" />

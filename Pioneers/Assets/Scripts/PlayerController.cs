@@ -35,13 +35,6 @@ public class PlayerController : MonoBehaviour
     private bool isSpeedUpActive = false;
     private bool isDead = false;
 
-    [Header("Items")]
-    public List<GameObject> speedUPItems;
-    public List<GameObject> doubleJumpItems;
-    public List<GameObject> speedDownItems;
-    public List<GameObject> weakenedJumpItems;
-    public List<GameObject> eggObstacles;
-
     private Animator animator;
     public CharacterFaceManager faceManager;
 
@@ -119,51 +112,23 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        if (isDead) return; // 이미 죽었으면 다시 실행하지 않음
+        if (isDead) return;
         isDead = true;
 
         deathCount++;
         Debug.Log("플레이어가 죽었습니다. 죽은 횟수: " + deathCount);
 
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.UpdateDeathCount(deathCount);
-            UIManager.Instance.OnPlayerDeath();
-        }
+        UIManager.Instance?.UpdateDeathCount(deathCount);
+        UIManager.Instance?.OnPlayerDeath();
+        GameManager.Instance?.HandlePlayerDeath(transform.position);
+        faceManager?.ShowFall();
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.HandlePlayerDeath(transform.position);
-        }
-
-        if (faceManager != null)
-        {
-            faceManager.ShowFall();
-        }
-
-        ResetToDefaultStats(); // 스탯 초기화
-
-        RestoreItemList(speedUPItems);
-        RestoreItemList(speedDownItems);
-        RestoreItemList(weakenedJumpItems);
-        RestoreItemList(doubleJumpItems);
-        RestoreItemList(eggObstacles);
+        ResetToDefaultStats();
     }
 
     public void ResetDeathState()
     {
         isDead = false;
-    }
-
-    private void RestoreItemList(List<GameObject> itemList)
-    {
-        if (itemList == null) return;
-
-        foreach (GameObject item in itemList)
-        {
-            if (item != null)
-                item.SetActive(true);
-        }
     }
 
     private void ResetToDefaultStats()
