@@ -15832,13 +15832,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 578328552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!1 &579206885 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4102172326025733049, guid: 0903f62878e1b8b46a1fc22eef24a7ac, type: 3}
@@ -21044,13 +21043,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 779684050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!1 &782856623
 GameObject:
   m_ObjectHideFlags: 0
@@ -30074,13 +30072,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212428017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!1 &1217220229
 GameObject:
   m_ObjectHideFlags: 0
@@ -36516,13 +36513,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1314356937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!1 &1323690132
 GameObject:
   m_ObjectHideFlags: 0
@@ -38691,13 +38687,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1410623509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!4 &1419265859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3426953312574819626, guid: c0767be8b7c21a54396cd60a62b1e114, type: 3}
@@ -39289,13 +39284,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1489936644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!4 &1495832664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2699490244079710216, guid: 6b828ffb8f6bffc4da199f2c3afa6ba8, type: 3}
@@ -55636,13 +55630,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668330845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!1 &1668857559
 GameObject:
   m_ObjectHideFlags: 0
@@ -57345,13 +57338,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1743005952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0398116d1e57944bb59a1f695fd244, type: 3}
+  m_Script: {fileID: 11500000, guid: 06c80de296960e14dacac20f72e0998d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
-  spawnOffset: {x: 0, y: 3, z: 0}
+  eggPrefab: {fileID: 4404100976013916946, guid: aeb578ac5178aab458ebcfaef5d47172, type: 3}
+  eggSpawnOffset: {x: 0, y: 3, z: 0}
   usedBlockSprite: {fileID: -3975646604157623891, guid: 4dc29f6b8f726964093cdf2e0151acd0, type: 3}
-  spikeDirection: 0
 --- !u!1 &1744852237 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6388797698936859335, guid: edf0b9bdab3662942a7f02139f23ab8e, type: 3}
