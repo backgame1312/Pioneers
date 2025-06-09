@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool canDoubleJump = false;
     private bool isWeakenedJump = false;
     private bool isSpeedUpActive = false;
+    private bool isDead = false;
 
     [Header("Items")]
     public List<GameObject> speedUPItems;
@@ -118,6 +119,9 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        if (isDead) return; // 이미 죽었으면 다시 실행하지 않음
+        isDead = true;
+
         deathCount++;
         Debug.Log("플레이어가 죽었습니다. 죽은 횟수: " + deathCount);
 
@@ -145,6 +149,12 @@ public class PlayerController : MonoBehaviour
         RestoreItemList(doubleJumpItems);
         RestoreItemList(eggObstacles);
     }
+
+    public void ResetDeathState()
+    {
+        isDead = false;
+    }
+
     private void RestoreItemList(List<GameObject> itemList)
     {
         if (itemList == null) return;

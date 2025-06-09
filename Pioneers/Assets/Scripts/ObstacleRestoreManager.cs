@@ -13,6 +13,9 @@ public class ObstacleRestoreManager : MonoBehaviour
     private EagleAttackController[] eagleAttackControllers;
     private MoleAttackController[] moleAttackControllers;
     private RaccoonAttackController[] raccoonAttackControllers;
+    private TrapBlock[] trapBlocks;
+    private StepActivatedPlatform[] stepActivatedPlatforms;
+    private ClosingWallController[] closingWallControllers;
 
     void Start()
     {
@@ -27,6 +30,9 @@ public class ObstacleRestoreManager : MonoBehaviour
         eagleAttackControllers = FindObjectsByType<EagleAttackController>(FindObjectsSortMode.None);
         moleAttackControllers = FindObjectsByType<MoleAttackController>(FindObjectsSortMode.None);
         raccoonAttackControllers = FindObjectsByType<RaccoonAttackController>(FindObjectsSortMode.None);
+        trapBlocks = FindObjectsByType<TrapBlock>(FindObjectsSortMode.None);
+        stepActivatedPlatforms = FindObjectsByType<StepActivatedPlatform>(FindObjectsSortMode.None);
+        closingWallControllers = FindObjectsByType<ClosingWallController>(FindObjectsSortMode.None);
     }
 
     public void RestoreAllObstacles()
@@ -97,6 +103,33 @@ public class ObstacleRestoreManager : MonoBehaviour
             {
                 if (raccoon != null)
                     raccoon.RestoreObstacle();
+            }
+        }
+
+        if (trapBlocks != null)
+        {
+            foreach (var trap in trapBlocks)
+            {
+                if (trap != null)
+                    trap.RestoreObstacle();
+            }
+        }
+
+        if (stepActivatedPlatforms != null)
+        {
+            foreach (var block in stepActivatedPlatforms)
+            {
+                if (block != null)
+                    block.RestoreObstacle();
+            }
+        }
+
+        if (closingWallControllers != null)
+        {
+            foreach (var wall in closingWallControllers)
+            {
+                if (wall != null)
+                    wall.RestoreObstacle();
             }
         }
     }

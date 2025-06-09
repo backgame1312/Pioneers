@@ -65,8 +65,10 @@
     <Compile Include="Assets\Scripts\ClearPlatformController.cs" />
     <Compile Include="Assets\Scripts\SnakeAttackController.cs" />
     <Compile Include="Assets\Scripts\FallingAttack.cs" />
+    <Compile Include="Assets\Scripts\MovingPlatformController.cs" />
     <Compile Include="Assets\Scripts\SpeechBubble.cs" />
     <Compile Include="Assets\Scripts\EventBlock.cs" />
+    <Compile Include="Assets\Scripts\ClosingWallsController.cs" />
     <Compile Include="Assets\Scripts\RaccoonAttackController.cs" />
     <Compile Include="Assets\Scripts\MoleAttackController.cs" />
     <Compile Include="Assets\Scripts\SpikeBlockActivator.cs" />
@@ -84,14 +86,15 @@
     <Compile Include="Assets\Scripts\JumpObstacleManager.cs" />
     <Compile Include="Assets\Scripts\ObstacleRestoreManager.cs" />
     <Compile Include="Assets\Scripts\CharacterFaceManager.cs" />
-    <Compile Include="Assets\Scripts\MovingFlatformController.cs" />
     <Compile Include="Assets\Scripts\RocketManager.cs" />
     <Compile Include="Assets\Scripts\RisingPlatform.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MoleHoleTeleporter.cs" />
     <Compile Include="Assets\Scripts\AppearingPlatformManager.cs" />
     <Compile Include="Assets\Scripts\FallingAttackManager.cs" />
+    <Compile Include="Assets\Scripts\SnakeDropController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\StepActivatedPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

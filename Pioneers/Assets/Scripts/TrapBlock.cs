@@ -17,6 +17,7 @@ public class TrapBlock : MonoBehaviour
     private bool trapTriggered = false;
     private SpriteRenderer spriteRenderer;
     private Sprite originalSprite;
+    private GameObject spawnedEnemy; // 생성된 적 저장
 
     public enum SpikeDirection
     {
@@ -75,7 +76,7 @@ public class TrapBlock : MonoBehaviour
                 rotation = Quaternion.Euler(0, 0, 180); // 아래를 보도록 회전
             }
 
-            Instantiate(enemyPrefab, spawnPos, rotation);
+            spawnedEnemy = Instantiate(enemyPrefab, spawnPos, rotation);
             Debug.Log("트랩 작동: 가시 생성됨!");
         }
 
@@ -85,5 +86,25 @@ public class TrapBlock : MonoBehaviour
         {
             spriteRenderer.sprite = usedBlockSprite;
         }
+    }
+
+    public void RestoreObstacle()
+    {
+        trapTriggered = false;
+
+        // 스프라이트 원래대로
+        if (spriteRenderer != null && originalSprite != null)
+        {
+            spriteRenderer.sprite = originalSprite;
+        }
+
+        // 생성된 적 제거
+        if (spawnedEnemy != null)
+        {
+            Destroy(spawnedEnemy);
+            spawnedEnemy = null;
+        }
+
+        Debug.Log("트랩이 초기 상태로 복원되었습니다.");
     }
 }

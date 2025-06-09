@@ -16,6 +16,7 @@ TagManager:
   - Egg_Obstacle
   - TurnPoint
   - Checkpoint
+  - Spike
   layers:
   - Default
   - TransparentFX

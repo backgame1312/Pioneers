@@ -73,9 +73,14 @@ public class GameManager : MonoBehaviour
             Vector3 respawnPos = respawnPoint != null ? respawnPoint.position : playerObject.transform.position;
 
             PlayerController playerController = playerObject.GetComponent<PlayerController>();
-            if (playerController != null && playerController.hasLastNest)
+            if (playerController != null)
             {
-                respawnPos = playerController.lastCheckpointPosition;
+                if (playerController.hasLastNest)
+                {
+                    respawnPos = playerController.lastCheckpointPosition;
+                }
+
+                playerController.ResetDeathState(); // <-- 무조건 호출하도록 이 위치로 옮겨
             }
 
             playerObject.transform.position = respawnPos;
