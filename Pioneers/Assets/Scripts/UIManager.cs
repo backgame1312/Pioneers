@@ -159,9 +159,9 @@ public class UIManager : MonoBehaviour
     {
         resultPanel.SetActive(true);
 
-        timeText.text = $"Time: {FormatTime(time)}";
-        deathText.text = $"Deaths: {deaths}";
-        eggText.text = $"Eggs: {eggs}";
+        timeText.text = $"°É¸° ½Ã°£: {FormatTime(time)}";
+        deathText.text = $"Á×Àº È½¼ö: {deaths}¹ø";
+        eggText.text = $"È¹µæÇÑ ´Þ°¿: {eggs}°³";
     }
 
     private string FormatTime(float t)
@@ -169,5 +169,11 @@ public class UIManager : MonoBehaviour
         int min = Mathf.FloorToInt(t / 60);
         int sec = Mathf.FloorToInt(t % 60);
         return $"{min:00}:{sec:00}";
+    }
+    public void OnClickReturnToMainFromResult()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        Time.timeScale = 1f;
+        FadeManager.Instance.FadeToScene("MainMenu");
     }
 }

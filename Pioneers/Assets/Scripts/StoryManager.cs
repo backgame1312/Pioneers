@@ -1,52 +1,110 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class StoryController : MonoBehaviour
 {
-    public Image storyImage;
-    public Sprite[] storySprites;
-    public float fadeDuration = 0.5f;
-    public float displayDuration = 2f;
+    [System.Serializable]
+    public class SlideData
+    {
+        public Sprite image;
+        public AudioClip bgm;
+        public AudioClip sfx;
+    }
 
-    private int currentIndex = 0;
+    public Image storyImage;
+    public Image fadeImage;
+    public float fadeDuration = 0.5f;
+    public float displayDuration = 2f; 
+
+    public SlideData[] slides;
+    private int currentSlide = 0;
+
+    private AudioSource bgmSource;
+    private AudioSource sfxSource;
 
     void Start()
     {
-        StartCoroutine(PlayStory());
+        bgmSource = gameObject.AddComponent<AudioSource>();
+        bgmSource.loop = true;
+
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource.loop = false;
+
+        StartCoroutine(PlaySlides());
     }
 
-    IEnumerator PlayStory()
+    IEnumerator PlaySlides()
     {
-        while (currentIndex < storySprites.Length)
+        for (int i = 0; i < slides.Length; i++)
         {
-            storyImage.sprite = storySprites[currentIndex];
+            SlideData slide = slides[i];
 
-            yield return StartCoroutine(FadeImage(0, 1));
+            yield return StartCoroutine(Fade(1));
+
+            storyImage.sprite = slide.image;
+
+            bgmSource.Stop();
+            bgmSource.clip = null;
+
+            if (slide.bgm != null)
+            {
+                bgmSource.clip = slide.bgm;
+                bgmSource.Play();
+            }
+
+            sfxSource.Stop();
+            sfxSource.clip = null;
+
+            if (slide.sfx != null)
+            {
+                sfxSource.PlayOneShot(slide.sfx); 
+            }
+
+            yield return StartCoroutine(Fade(0));
 
             yield return new WaitForSeconds(displayDuration);
 
-            yield return StartCoroutine(FadeImage(1, 0));
-
-            currentIndex++;
         }
+        bgmSource.Stop();
 
         FadeManager.Instance.FadeToScene("Stage_EX");
     }
 
-    IEnumerator FadeImage(float startAlpha, float endAlpha)
+
+    IEnumerator Fade(float targetAlpha)
     {
+        float startAlpha = fadeImage.color.a;
         float t = 0;
-        Color c = storyImage.color;
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
-            c.a = Mathf.Lerp(startAlpha, endAlpha, t / fadeDuration);
-            storyImage.color = c;
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, t / fadeDuration);
+            fadeImage.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
-        c.a = endAlpha;
-        storyImage.color = c;
     }
+
+    IEnumerator ChangeBGMWithFade(AudioClip newBGM)
+    {
+        float fadeTime = 0.5f;
+        while (bgmSource.volume > 0)
+        {
+            bgmSource.volume -= Time.deltaTime / fadeTime;
+            yield return null;
+        }
+
+        bgmSource.Stop();
+        bgmSource.clip = newBGM;
+        bgmSource.Play();
+
+        while (bgmSource.volume < 1)
+        {
+            bgmSource.volume += Time.deltaTime / fadeTime;
+            yield return null;
+        }
+        bgmSource.volume = 1;
+    }
+
 }

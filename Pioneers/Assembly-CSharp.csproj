@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\ParticleManager.cs" />
     <Compile Include="Assets\Scripts\DisappearingPlatformManager.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\CheckpointManager.cs" />
     <Compile Include="Assets\Scripts\FadeManager.cs" />
     <Compile Include="Assets\Scripts\ItemTooltip.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\JumpObstacleManager.cs" />
     <Compile Include="Assets\Scripts\ObstacleRestoreManager.cs" />
     <Compile Include="Assets\Scripts\CharacterFaceManager.cs" />
+    <Compile Include="Assets\Scripts\TutorialGoalFlag.cs" />
     <Compile Include="Assets\Scripts\RocketManager.cs" />
     <Compile Include="Assets\Scripts\RisingPlatform.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

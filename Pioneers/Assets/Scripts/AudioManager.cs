@@ -31,7 +31,6 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
 
         SetBGMVolume(bgmVolume);
