@@ -232,6 +232,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator LoadNextSceneWithDelay()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("MainMenu");
     }
 }
