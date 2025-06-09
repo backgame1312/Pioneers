@@ -11,6 +11,9 @@ public class ClosingWallController : MonoBehaviour
     [Header("Target X Position")]
     public float targetX = 0f;
 
+    [Header("Wall Activation Trigger X (벽 생성 시점)")]
+    public float wallActivateX = -1f;
+
     [Header("Move Speed")]
     public float moveSpeed = 3f;
 
@@ -23,10 +26,12 @@ public class ClosingWallController : MonoBehaviour
 
     private Vector3 originalPosition;
     private bool isMoving = false;
+    private bool hasActivatedChildren = false;
 
     void Start()
     {
         originalPosition = transform.position;
+        SetChildrenActive(false);
     }
 
     void Update()
@@ -51,11 +56,17 @@ public class ClosingWallController : MonoBehaviour
             pos.x = Mathf.MoveTowards(pos.x, targetX, moveSpeed * Time.deltaTime);
             transform.position = pos;
 
-            // 오차 범위로 타겟 도달 판정
+            // wallActivateX 도달 시 자식 오브젝트 활성화
+            if (!hasActivatedChildren && transform.position.x <= wallActivateX)
+            {
+                SetChildrenActive(true);
+                hasActivatedChildren = true;
+            }
+
             if (Mathf.Abs(transform.position.x - targetX) < 0.01f)
             {
                 isMoving = false;
-                transform.position = new Vector3(targetX, transform.position.y, transform.position.z); // 정확히 맞춰줌
+                transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
             }
         }
     }
@@ -64,6 +75,19 @@ public class ClosingWallController : MonoBehaviour
     {
         transform.position = originalPosition;
         isMoving = false;
+        hasActivatedChildren = false;
+        SetChildrenActive(false);
         Debug.Log("즉시 복원 완료");
+    }
+
+    private void SetChildrenActive(bool active)
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("WallPart"))
+            {
+                child.gameObject.SetActive(active);
+            }
+        }
     }
 }

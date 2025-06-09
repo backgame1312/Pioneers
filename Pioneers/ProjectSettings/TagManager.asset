@@ -17,6 +17,7 @@ TagManager:
   - TurnPoint
   - Checkpoint
   - Spike
+  - WallPart
   layers:
   - Default
   - TransparentFX
