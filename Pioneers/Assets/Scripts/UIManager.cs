@@ -161,7 +161,7 @@ public class UIManager : MonoBehaviour
 
         timeText.text = $"°É¸° ½Ã°£: {FormatTime(time)}";
         deathText.text = $"Á×Àº È½¼ö: {deaths}¹ø";
-        eggText.text = $"È¹µæÇÑ ´Þ°¿: {eggs}°³";
+        eggText.text = $"µÇÃ£Àº ´Þ°¿: {eggs}/10°³";
     }
 
     private string FormatTime(float t)
